@@ -1,0 +1,11 @@
+@import '~bootstrap/scss/bootstrap';
+
+a {
+  display: block !important;
+  max-width: 250px !important;
+  background-color: #fff !important;
+  color: #000 !important;
+  .center {
+    margin: 0 auto !important;
+  }
+}
