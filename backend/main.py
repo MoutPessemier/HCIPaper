@@ -23,4 +23,3 @@ Charlotte = Dier("Charlotte :)", 7, "mens", "blond", "aardig", True)
 
 print(Charlotte.geefgegevens())
 print("hello world")
-print("testje van Charlotte")
