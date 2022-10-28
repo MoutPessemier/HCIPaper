@@ -3,9 +3,10 @@
 a {
   display: block !important;
   max-width: 250px !important;
-  background-color: #fff !important;
-  color: #000 !important;
-  .center {
+  &.center {
     margin: 0 auto !important;
+  }
+  &.hidden {
+    display: none !important;
   }
 }
