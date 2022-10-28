@@ -1,5 +1,5 @@
-#if you are commits behind master: checkout on branch, then pull into current merge from master origin (remote)
-
+#Tip: if you are commits behind master (as seen on Github): checkout on branch (locally), then pull into current merge from master origin (remote)
+# In order to update branch, checkout into branch (locally), pull into current merge from branch (remote)
 import datetime as dt
 import pandas as pd
 import numpy as py
