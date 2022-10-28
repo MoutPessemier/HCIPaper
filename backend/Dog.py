@@ -130,5 +130,3 @@ Billie.give_records()
 #output in jsonss
 
 
-#DAG CHARLOTTE DIT IS EEN TEST
-#ik heb het gezien :) dit is het antwoord
