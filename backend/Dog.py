@@ -108,16 +108,8 @@ class Dog:
         self.__id = newid
 
 
-Billie = Dog(1, 'Billie', 'teef', 'klein', 2, dogfriendly = True, training = False)
-Billie.assign_id(20)
-#Silver = Dog(2, )
 
 
-Billie.give_catfriendly()
-print(Billie.give_score())
-Billie.higher_score(5)
-print(Billie.give_score())
-Billie.give_records()
 
 
 
