@@ -19,9 +19,15 @@ h1 {
 }
 
 p {
-  max-width: 600px !important;
-  display: block;
-  margin: 0 auto !important;
+  &.txt-info {
+    max-width: 600px !important;
+    display: block;
+    margin: 0 auto !important;
+  }
+  &.question {
+    font-size: 16px;
+    margin-right: 2em;
+  }
 }
 
 a {
@@ -32,5 +38,36 @@ a {
   }
   &.hidden {
     display: none !important;
+  }
+}
+
+div {
+  &.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.q-container {
+    margin-top: 0.5em;
+    margin-bottom: 1.5em;
+  }
+
+  &.radio-container {
+    margin-top: 0.5em;
+  }
+
+  &.importance-container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+input[type='range'] {
+  max-width: 280px;
+}
+
+button {
+  &.submit {
+    margin-bottom: 5em;
   }
 }
