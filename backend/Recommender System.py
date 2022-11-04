@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #if you are commits behind master: checkout on branch, then pull into current merge from master origin (remote)
 
 import datetime as dt
@@ -60,6 +61,15 @@ class Dog:
 
     def give_BCD(self):
         return self.__BCD
+=======
+#Tip: if you are commits behind master (as seen on Github): checkout on branch (locally), then pull into current merge from master origin (remote)
+# In order to update branch, checkout into branch (locally), pull into current merge from branch (remote)
+import datetime as dt
+import pandas as pd
+import numpy as py
+import pandas as pd
+import Dog as D
+>>>>>>> origin/backendV2
 
 
 
@@ -71,7 +81,11 @@ class Recommender:
 
     def append_dog_data(self, id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, score= 0):
         try:
+<<<<<<< HEAD
             nieuwe_hond = Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD)
+=======
+            nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD)
+>>>>>>> origin/backendV2
             self.__recommender_data = self.__recommender_data.append({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
                  'age': age, 'dogfriendly': dogfriendly, 'catfriendly': catfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
                  'hug': hug,'training': training,'BCD': BCD,'score': score,}, ignore_index=True)
@@ -85,6 +99,12 @@ class Recommender:
     def give_data(self):
         return self.__recommender_data
 
+<<<<<<< HEAD
+=======
+
+groep9= Recommender()
+
+>>>>>>> origin/backendV2
 '''
     def append_data_recommender(self, recommender):
         self.__recommender.append(recommender)  # reservatie toevoegen aan reservatielijst en gegevens reservaties toevoegen aan dataframe
@@ -106,29 +126,51 @@ class Recommender:
 
 
 
+<<<<<<< HEAD
+=======
+#---------------------------------------------------
+#Exeption handling
+
+>>>>>>> origin/backendV2
 class Oepsie(Exception):
 
     def __init__(self):
         super().__init__()
 
     def __str__(self):
+<<<<<<< HEAD
         return 'Er is een fout gebeurd tijdens het inlezen van de hond'
 
 class OutputGebruiktAlsInputException(Exception):
+=======
+        return 'There was a problem reading the data'
+
+class OutputGivenInput(Exception):
+>>>>>>> origin/backendV2
 
     def __init__(self):
         super().__init__()
 
     def __str__(self):
+<<<<<<< HEAD
         return 'Opgelet, de output werd als input gegeven, probeer een ander bestand in te geven!'
 
+=======
+        return 'Attention, output given as input'
+
+#---------------------------------------------------
+>>>>>>> origin/backendV2
 # Inlezen data, is enkel leuk voor testing, nog aan te passen later:
 
 bool = False
 
 while not bool:
 
+<<<<<<< HEAD
     print('\n')
+=======
+    #print('\n')
+>>>>>>> origin/backendV2
     #value = input("Geef uw bestandsnaam in, gevolgd door enter (ZONDER '.csv' extensie): ")
 
     try:
@@ -136,18 +178,67 @@ while not bool:
         df = pd.read_csv("DogdataTest" + '.csv', nrows=10000)
         bool = True
         print('\n')
+<<<<<<< HEAD
         print('Bestand is ok')
         print('\n')
 
     except OutputGebruiktAlsInputException as o:
+=======
+        print('File loaded')
+        print('\n')
+
+    except OutputGivenInput as o:
+>>>>>>> origin/backendV2
         print(o)
 
     except FileNotFoundError:
 
         print('---------------------------------')
+<<<<<<< HEAD
         print('Opgelet, heeft u toch ".csv" toegevoegd? Dit moet zonder ".csv". Of kijk de bestandsnaam nog eens na.')
         print('Probeer het opnieuw:')
         print('---------------------------------')
 
 
 print(df[1,'name'])
+=======
+        print('Attention, did you add ".csv"? You need to leave ".csv". Otherwise check the name of your file.')
+        print('Please try again:')
+        print('---------------------------------')
+
+
+#Nu gaan we de dataobject hond aanmaken en al direct in onze recommender systeem steken
+for row, dog in df.iterrows(): #.itterrows() geeft een rowindex en data weer in de rij
+    if row > len(df):
+        break
+
+    else:
+        # print('\nRow number:', row)
+        # print('Row-data:\n', dog)
+        # print('The value of \'name\' in this row:', dog['name'])
+        groep9.append_dog_data(dog['id'], dog['name'], dog['size'], dog['sex'], dog['age'], dog['dogfriendly'], dog['catfriendly'], dog['childfriendly'], dog['gardenreq'], dog['hug'], dog['training'], dog['BCD'])
+
+
+print(groep9.give_data()['name'])
+
+#---------------------------------------------------
+#Hier testen we alles
+#print(df.info())
+# print(df.iloc[1, 0:8]) #voor rij 1 in de dataset print dan kolommen 0 tot 7
+# print('\n') #een witregel
+# print(df["name"]) #print de kolom name voor alle rijen
+# print('\n') #een witregel
+
+
+
+
+
+
+Billie = D.Dog(1, 'Billie', 'teef', 'klein', 2, dogfriendly = True, training = False) #eerst moet je "D." gebruiken om de andere .py file op te roepen. Dan kan je alle functies gebruiken
+Billie.assign_id(20)
+#Silver = Dog(2, )Billie.give_catfriendly()
+#print(Billie.give_score())
+Billie.higher_score(5)
+#print(Billie.give_score())
+#Billie.give_records()
+>>>>>>> origin/backendV2
