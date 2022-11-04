@@ -1,3 +1,67 @@
+<<<<<<< HEAD
+#if you are commits behind master: checkout on branch, then pull into current merge from master origin (remote)
+
+import datetime as dt
+import pandas as pd
+import numpy as np
+
+
+
+class Dog:
+
+    def __init__(self, id, name, size, sex, age, dogfriendly=True, catfriendly=True, childfriendly=True, gardenreq=True, hug =True, training=True, BCD=False):
+        ## dogfriendly, catfriendly, childfriendly, gardenreq, hug, training en BCD moeten worden aangepast zoals in volgend voorbeeld indien anders dan de defaultwaarde:
+        ### Billie = Dier(1, 'Billie', 'teef','klein', 2, dogfriendly=  False, training= False)
+        ### defaultwaardes moeten altijd op het einde van de init staan
+        self.__id = id
+        self.__name = name
+        self.__size = size
+        self.__sex = sex
+        self.__age = age
+        self.__dogfriendly = dogfriendly
+        self.__catfriendly = catfriendly
+        self.__childfriendly = childfriendly
+        self.__gardenreq = gardenreq
+        self.__hug = hug
+        self.__training = training
+        self.__BCD = BCD
+
+    def give_id(self):
+        return self.__id
+
+    def give_name(self):
+        return self.__name
+
+    def give_sex(self):
+        return self.__sex
+
+    def give_size(self):
+        return self.__size
+
+    def give_age(self):
+        return self.__age
+
+    def give_dogfriendly(self):
+        return self.__dogfriendly
+
+    def give_catfriendly(self):
+        return self.__catfriendly
+
+    def give_childfriendly(self):
+        return self.__childfriendly
+
+    def give_gardenreq(self):
+        return self.__gardenreq
+
+    def give_hug(self):
+        return self.__hug
+
+    def give_training(self):
+        return self.__training
+
+    def give_BCD(self):
+        return self.__BCD
+=======
 #Tip: if you are commits behind master (as seen on Github): checkout on branch (locally), then pull into current merge from master origin (remote)
 # In order to update branch, checkout into branch (locally), pull into current merge from branch (remote)
 import datetime as dt
@@ -5,6 +69,7 @@ import pandas as pd
 import numpy as py
 import pandas as pd
 import Dog as D
+>>>>>>> origin/backendV2
 
 
 
@@ -16,7 +81,11 @@ class Recommender:
 
     def append_dog_data(self, id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, score= 0):
         try:
+<<<<<<< HEAD
+            nieuwe_hond = Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD)
+=======
             nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD)
+>>>>>>> origin/backendV2
             self.__recommender_data = self.__recommender_data.append({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
                  'age': age, 'dogfriendly': dogfriendly, 'catfriendly': catfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
                  'hug': hug,'training': training,'BCD': BCD,'score': score,}, ignore_index=True)
@@ -30,9 +99,12 @@ class Recommender:
     def give_data(self):
         return self.__recommender_data
 
+<<<<<<< HEAD
+=======
 
 groep9= Recommender()
 
+>>>>>>> origin/backendV2
 '''
     def append_data_recommender(self, recommender):
         self.__recommender.append(recommender)  # reservatie toevoegen aan reservatielijst en gegevens reservaties toevoegen aan dataframe
@@ -54,33 +126,51 @@ groep9= Recommender()
 
 
 
+<<<<<<< HEAD
+=======
 #---------------------------------------------------
 #Exeption handling
 
+>>>>>>> origin/backendV2
 class Oepsie(Exception):
 
     def __init__(self):
         super().__init__()
 
     def __str__(self):
+<<<<<<< HEAD
+        return 'Er is een fout gebeurd tijdens het inlezen van de hond'
+
+class OutputGebruiktAlsInputException(Exception):
+=======
         return 'There was a problem reading the data'
 
 class OutputGivenInput(Exception):
+>>>>>>> origin/backendV2
 
     def __init__(self):
         super().__init__()
 
     def __str__(self):
+<<<<<<< HEAD
+        return 'Opgelet, de output werd als input gegeven, probeer een ander bestand in te geven!'
+
+=======
         return 'Attention, output given as input'
 
 #---------------------------------------------------
+>>>>>>> origin/backendV2
 # Inlezen data, is enkel leuk voor testing, nog aan te passen later:
 
 bool = False
 
 while not bool:
 
+<<<<<<< HEAD
+    print('\n')
+=======
     #print('\n')
+>>>>>>> origin/backendV2
     #value = input("Geef uw bestandsnaam in, gevolgd door enter (ZONDER '.csv' extensie): ")
 
     try:
@@ -88,15 +178,30 @@ while not bool:
         df = pd.read_csv("DogdataTest" + '.csv', nrows=10000)
         bool = True
         print('\n')
+<<<<<<< HEAD
+        print('Bestand is ok')
+        print('\n')
+
+    except OutputGebruiktAlsInputException as o:
+=======
         print('File loaded')
         print('\n')
 
     except OutputGivenInput as o:
+>>>>>>> origin/backendV2
         print(o)
 
     except FileNotFoundError:
 
         print('---------------------------------')
+<<<<<<< HEAD
+        print('Opgelet, heeft u toch ".csv" toegevoegd? Dit moet zonder ".csv". Of kijk de bestandsnaam nog eens na.')
+        print('Probeer het opnieuw:')
+        print('---------------------------------')
+
+
+print(df[1,'name'])
+=======
         print('Attention, did you add ".csv"? You need to leave ".csv". Otherwise check the name of your file.')
         print('Please try again:')
         print('---------------------------------')
@@ -136,3 +241,4 @@ Billie.assign_id(20)
 Billie.higher_score(5)
 #print(Billie.give_score())
 #Billie.give_records()
+>>>>>>> origin/backendV2

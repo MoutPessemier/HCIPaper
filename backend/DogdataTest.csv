@@ -1,5 +1,13 @@
+<<<<<<< HEAD
+id;name;size;sex;age;dogfriendly;catfriendly;childfriendly;gardenreq;hug;training;BCD
+1;Charlotte;small;F;22;TRUE;FALSE;TRUE;TRUE;TRUE;TRUE;FALSE
+2;Nam;Medium;M;22;TRUE;FALSE;TRUE;TRUE;TRUE;FALSE;FALSE
+3;Jackie;Medium;F;21;TRUE;TRUE;TRUE;TRUE;TRUE;TRUE;TRUE
+4;Mout;Large;M;24;TRUE;FALSE;FALSE;TRUE;TRUE;TRUE;FALSE
+=======
 id,name,size,sex,age,dogfriendly,catfriendly,childfriendly,gardenreq,hug,training,BCD
 1,Charlotte,small,F,22,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE
 2,Nam,Medium,M,22,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,FALSE
 3,Jackie,Medium,F,21,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
 4,Mout,Large,M,24,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
+>>>>>>> origin/backendV2
