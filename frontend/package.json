@@ -7,7 +7,7 @@
     "start": "parcel --open",
     "build": "parcel build"
   },
-  "author": "",
+  "author": "Mout Pessemier",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",

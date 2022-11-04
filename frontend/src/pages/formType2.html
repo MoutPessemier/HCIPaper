@@ -4,11 +4,120 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>My First Parcel App</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="../style/style.scss" />
+    <script type="module" src="../js/formType2.js"></script>
+    <title>HondenMatcher | Form Type 2</title>
   </head>
   <body>
     <div class="container">
       <h1>Form Type 2</h1>
+      <p>Fill in some questions so that we can better match you with a dog you're looking for!</p>
+      <form id="form">
+        <div class="mb-3 form-container">
+          <div class="q-container">
+            <div class="importance-container">
+              <p class="question">
+                Q1. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab magnam dicta quaerat
+                pariatur sed sunt?
+              </p>
+              <div class="range-slider">
+                <label for="range1" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+                <input type="range" class="form-range" id="range1" min="0" max="100" />
+              </div>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q1y" />
+              <label for="q1y" class="form-check-label">Yes</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q1n" />
+              <label for="q1n" class="form-check-label">No</label>
+            </div>
+          </div>
+          <div class="q-container">
+            <div class="importance-container">
+              <p class="question">
+                Q2. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab magnam dicta quaerat
+                pariatur sed sunt?
+              </p>
+              <div class="range-slider">
+                <label for="range2" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+                <input type="range" class="form-range" id="range2" min="0" max="100" />
+              </div>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q2y" />
+              <label for="q2y" class="form-check-label">Yes</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q2n" />
+              <label for="q2n" class="form-check-label">No</label>
+            </div>
+          </div>
+          <div class="q-container">
+            <div class="importance-container">
+              <p class="question">
+                Q3. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab magnam dicta quaerat
+                pariatur sed sunt?
+              </p>
+              <div class="range-slider">
+                <label for="range3" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+                <input type="range" class="form-range" id="range3" min="0" max="100" />
+              </div>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q3y" />
+              <label for="q3y" class="form-check-label">Yes</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q3n" />
+              <label for="q3n" class="form-check-label">No</label>
+            </div>
+          </div>
+          <div class="q-container">
+            <div class="importance-container">
+              <p class="question">
+                Q4. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab magnam dicta quaerat
+                pariatur sed sunt?
+              </p>
+              <div class="range-slider">
+                <label for="range4" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+                <input type="range" class="form-range" id="range4" min="0" max="100" />
+              </div>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q4y" />
+              <label for="q4y" class="form-check-label">Yes</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q4n" />
+              <label for="q4n" class="form-check-label">No</label>
+            </div>
+          </div>
+          <div class="q-container">
+            <div class="importance-container">
+              <p class="question">
+                Q5. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab magnam dicta quaerat
+                pariatur sed sunt?
+              </p>
+              <div class="range-slider">
+                <label for="range5" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+                <input type="range" class="form-range" id="range5" min="0" max="100" />
+              </div>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q5y" />
+              <label for="q5y" class="form-check-label">Yes</label>
+            </div>
+            <div class="radio-container">
+              <input type="radio" class="form-check-input" id="q5n" />
+              <label for="q5n" class="form-check-label">No</label>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary submit" id="submit">Submit</button>
+      </form>
     </div>
   </body>
 </html>
