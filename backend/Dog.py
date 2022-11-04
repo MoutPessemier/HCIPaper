@@ -1,11 +1,7 @@
 class Dog:
 
     def __init__(self, id, name, sex, size, age, dogfriendly=True, catfriendly=True, childfriendly=True, gardenreq=True,
-                 hug=True, training=True, BCD=False, score=0):
-
-        ### dogfriendly, catfriendly, childfriendly, gardenreq, hug, training en BCD moeten worden aangepast zoals in volgend voorbeeld indien anders dan de defaultwaarde:
-        ### Billie = Dier(1, 'Billie', 'teef','klein', 2, dogfriendly=  False, training= False)
-        ### defaultwaardes moeten altijd op het einde van de init staan
+                 hug=True, training=True, BCD=False, Description= '', Image= '', score=0):
 
         self.__id = id
         self.__name = name
@@ -19,7 +15,10 @@ class Dog:
         self.__hug = hug
         self.__training = training
         self.__BCD = BCD
+        self.__Description= Description
+        self.__image = Image
         self.__score = score
+
 
 
 
@@ -107,22 +106,18 @@ class Dog:
     def assign_id(self, newid):
         self.__id = newid
 
+#
+# Billie = Dog(1, 'Billie', 'teef', 'klein', 2, dogfriendly = True, training = False)
+# Billie.assign_id(20)
+# #Silver = Dog(2, )
+#
+#
+# Billie.give_catfriendly()
+# print(Billie.give_score())
+# Billie.higher_score(5)
+# print(Billie.give_score())
+# Billie.give_records()
 
-<<<<<<< HEAD
-Billie = Dog(1, 'Billie', 'teef', 'klein', 2, dogfriendly = True, training = False)
-Billie.assign_id(20)
-#Silver = Dog(2, )
-
-
-Billie.give_catfriendly()
-print(Billie.give_score())
-Billie.higher_score(5)
-print(Billie.give_score())
-Billie.give_records()
-=======
-
-
->>>>>>> origin/backendV2
 
 
 
