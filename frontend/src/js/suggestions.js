@@ -1,19 +1,22 @@
-const generateCards = (container, json) => {
-  // <div class="card">
-  //   <img src="#" class="card-img-top" alt="#" />
-  //   <div class="card-body">
-  //     <h5 class="card-title">Card title</h5>
-  //     <p class="card-text">
-  //       Some quick example text to build on the card title and make up the bulk of the card's content.
-  //     </p>
-  //   </div>
-  // </div>
-  //TODO: add text and attributes to the correct elements
+const generateCards = (container, dog) => {
   const card = document.createElement('div');
+  card.classList.add('card');
+
   const cardImg = document.createElement('img');
+  cardImg.classList.add('card-img-top');
+  cardImg.setAttribute('alt', `Image of dog ${dog.name}`);
+  cardImg.setAttribute('src', dog.imageURL);
+
   const cardBody = document.createElement('div');
+  cardBody.classList.add('card-body');
+
   const cardTitle = document.createElement('h5');
+  cardTitle.classList.add('card-title');
+  cardTitle.innerHTML = dog.name;
+
   const cardText = document.createElement('p');
+  cardText.classList.add('card-text');
+  cardText.innerHTML = dog.description;
 
   cardBody.appendChild(cardTitle);
   cardBody.appendChild(cardText);
@@ -25,9 +28,35 @@ const generateCards = (container, json) => {
 };
 
 const init = () => {
-  // this needs to happen as soon as the backend sends over the result via a get method
   const cardsContainer = document.getElementById('cards-container');
-  generateCards(cardsContainer, '');
+  fetch('')
+    .then(data => data.json())
+    .then(dogs => {
+      dogs.forEach(dog => {
+        generateCards(cardsContainer, dog);
+      });
+    });
+
+  const submitBtn = document.getElementById('submit');
+  submitBtn.addEventListener('click', e => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      //TODO: get values
+      //body: JSON.stringify(),
+    };
+    fetch('', options)
+      .then(data => {
+        if (!data) {
+          throw Error(data.status);
+        }
+        return data.json();
+      })
+      //TODO: update
+      .then(update => {});
+  });
 };
 
 window.onload = init();
