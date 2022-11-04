@@ -15,7 +15,7 @@ img {
 
 h1 {
   margin-top: 1em !important;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5em !important;
 }
 
 p {
@@ -25,8 +25,11 @@ p {
     margin: 0 auto !important;
   }
   &.question {
-    font-size: 16px;
-    margin-right: 2em;
+    font-size: 16px !important;
+    margin-right: 2em !important;
+  }
+  &.bold {
+    font-weight: bold;
   }
 }
 
@@ -43,31 +46,48 @@ a {
 
 div {
   &.form-container {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  &.cards-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
 
   &.q-container {
-    margin-top: 0.5em;
-    margin-bottom: 1.5em;
+    margin-top: 0.5em !important;
+    margin-bottom: 1.5em !important;
   }
 
   &.radio-container {
-    margin-top: 0.5em;
+    margin-top: 0.5em !important;
   }
 
   &.importance-container {
-    display: flex;
-    flex-direction: row;
+    display: flex !important;
+    flex-direction: row !important;
+    &.sp-bw {
+      margin-top: 1em !important;
+      justify-content: space-between !important;
+    }
   }
 }
 
 input[type='range'] {
-  max-width: 280px;
+  max-width: 280px !important;
 }
 
 button {
   &.submit {
-    margin-bottom: 5em;
+    margin-bottom: 5em !important;
   }
+  &.final {
+    margin-top: 1.25em !important;
+  }
+}
+
+.float-left {
+  float: left !important;
 }
