@@ -21,17 +21,10 @@ class Databank:
 
         df = pd.read_csv("Dogs" + '.csv', nrows=10000)  # data inlezen
         for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            if row > len(df):
-                break
-
-            else:
-                # print('\nRow number:', row)
-                # print('Row-data:\n', dog)
-                # print('The value of \'name\' in this row:', dog['name'])
-                groep9.append_dog_data(id(dog['naam']), dog['Naam'], dog['Geslacht'], dog['Grootte'], dog['Leeftijd'],
-                                       dog['Andere_hond'],
-                                       dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'],
-                                       dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'])
+            groep9.append_dog_data(row, dog['Naam'], dog['Geslacht'], dog['Grootte'], dog['Leeftijd'],
+                                   dog['Andere_hond'],
+                                   dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'],
+                                   dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'])
 
     def append_dog_data(self, id, name, sex, size, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, score= 0):
         try:
@@ -50,20 +43,23 @@ class Databank:
 
 
     def add_points(self, id, score):
+        self.__recommender_data
+        for row, dog in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
+            if dog['dog_id'] == id:
+                self.__recommender_data.loc[row, 'score']+= score
+
+
+    def give_id(self, naam):
         df = self.__recommender_data
         for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            if row > 5:
-                break
+            if dog['name'] == naam:
+                return df.loc[row, 'dog_id']
+
+    def give_dog_name(self, id):
+        df = self.__recommender_data
+        for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
             if dog['dog_id'] == id:
-                print("HIT")
-                self.__recommender_data.iloc[row, 'score']= score
-                print(self.__recommender_data.iloc[row, 'score'])
-            else:
-                print(dog['dog_id'])
-                print("NO-HIT")
-                pass
-
-
+                return df.loc[row, 'name']
 
 #    .iloc[(self.__recommender_data[dog_id] == dog_id), 'score']
 
@@ -75,7 +71,9 @@ class Databank:
     def give_score(self):
         return self.__recommender_data['score']
 
-
+    def give_top4(self):
+        df = self.__recommender_data
+        return df.sort_values(by=['score'], ascending=False).head(4)
 
 '''
     def append_data_recommender(self, recommender):
@@ -104,6 +102,31 @@ print('----------')
 
 groep9 = Databank()
 groep9.create_dog()
-groep9.add_points(id() , 23) #probleem is dat elke keer een nieuwe ID werd gegenereerd
-#print(groep9.give_data())
-print(groep9.give_score())
+
+# print('-----------')
+# print(groep9.give_data())
+# print('-----------')
+#
+# groep9.add_points(groep9.give_id('Bibi'), 23) #probleem is dat elke keer een nieuwe ID werd gegenereerd
+# groep9.add_points(groep9.give_id('Bibi'), 14) #probleem is dat elke keer een nieuwe ID werd gegenereerd
+# print(groep9.give_data())
+
+inputdata = ['Rue', 'Middel', 'Jong', 'Rue', 'Nee', 'enkel volwassenen', 'Ja', 'onbelangrijk', 'Ja', 'Ja']
+
+#onze recommender
+for input in inputdata:
+    for row, dog in groep9.give_data().iterrows(): #we gaan door elke hond in onze database
+        if input == dog['sex'] or input == dog['size'] or input == dog['age'] or input == dog['petfriendly']:
+            groep9.add_points(dog['dog_id'],1)
+
+        if input == dog['dogfriendly']:
+            groep9.add_points(dog['dog_id'], 1)
+
+
+
+print('Dit zijn de beste honden gegeven uw antwoorden: ')
+print('\n')
+print(groep9.give_top4())
+print('The end')
+
+
