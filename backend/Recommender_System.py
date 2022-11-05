@@ -28,7 +28,7 @@ class Databank:
                 # print('\nRow number:', row)
                 # print('Row-data:\n', dog)
                 # print('The value of \'name\' in this row:', dog['name'])
-                groep9.append_dog_data(id(dog), dog['Naam'], dog['Geslacht'], dog['Grootte'], dog['Leeftijd'],
+                groep9.append_dog_data(id(dog['naam']), dog['Naam'], dog['Geslacht'], dog['Grootte'], dog['Leeftijd'],
                                        dog['Andere_hond'],
                                        dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'],
                                        dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'])
@@ -52,11 +52,15 @@ class Databank:
     def add_points(self, id, score):
         df = self.__recommender_data
         for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            if row > len(df):
+            if row > 5:
                 break
             if dog['dog_id'] == id:
+                print("HIT")
                 self.__recommender_data.iloc[row, 'score']= score
+                print(self.__recommender_data.iloc[row, 'score'])
             else:
+                print(dog['dog_id'])
+                print("NO-HIT")
                 pass
 
 
@@ -100,5 +104,6 @@ print('----------')
 
 groep9 = Databank()
 groep9.create_dog()
-groep9.add_points(140208888606528, 23)
+groep9.add_points(id() , 23) #probleem is dat elke keer een nieuwe ID werd gegenereerd
+#print(groep9.give_data())
 print(groep9.give_score())
