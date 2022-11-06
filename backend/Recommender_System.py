@@ -78,7 +78,6 @@ class Databank:
 
 print('----------')
 
-#probleem: hoe geef je score weer van specifieke hond
 
 groep9 = Databank()
 groep9.create_dog()
