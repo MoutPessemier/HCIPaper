@@ -27,19 +27,15 @@ class Databank:
                                    dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'])
 
     def append_dog_data(self, id, name, sex, size, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, score= 0):
-        try:
-
-            nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image)
 
 
-            self.__recommender_data = self.__recommender_data.append({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
-                 'age': age, 'dogfriendly': dogfriendly, 'catfriendly': catfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
-                 'hug': hug,'training': training,'BCD': BCD,'score': score,'Description': Description, 'image': image}, ignore_index=True)
+        nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image)
 
-            return nieuwe_hond
+        self.__recommender.append(nieuwe_hond)
+        self.__recommender_data = self.__recommender_data.append({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
+             'age': age, 'dogfriendly': dogfriendly, 'catfriendly': catfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
+             'hug': hug,'training': training,'BCD': BCD,'score': score,'Description': Description, 'image': image}, ignore_index=True)
 
-        except Oepsie as e:
-            print(e)
 
 
     def add_points(self, id, score):
@@ -60,9 +56,6 @@ class Databank:
         for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
             if dog['dog_id'] == id:
                 return df.loc[row, 'name']
-
-#    .iloc[(self.__recommender_data[dog_id] == dog_id), 'score']
-
 
 
     def give_data(self):
@@ -91,6 +84,10 @@ groep9.create_dog()
 # print(groep9.give_data())
 
 inputdata = ['Rue', 'Middel', 'Jong', 'Rue', 'Nee', 'enkel volwassenen', 'Ja', 'onbelangrijk', 'Ja', 'Ja']
+
+#V1,2,3 8,9,10 hebben een gewicht
+#V4,5,6,7 hebben geen gewicht
+
 
 #onze recommender
 for input in inputdata:
