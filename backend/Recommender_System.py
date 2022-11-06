@@ -75,26 +75,6 @@ class Databank:
         df = self.__recommender_data
         return df.sort_values(by=['score'], ascending=False).head(4)
 
-'''
-    def append_data_recommender(self, recommender):
-        self.__recommender.append(recommender)  # reservatie toevoegen aan reservatielijst en gegevens reservaties toevoegen aan dataframe
-        self.__recommender_data = self.__recommender_data.append(
-            {'dog_id': reservatie.geef_reservatie_nummer(), 'name': reservatie.geef_auto().geef_volgnummer_auto(),
-             'size': reservatie.geef_starttijd(), 'sex': reservatie.geef_eindtijd(),
-             'age': reservatie.geef_beginlocatie(), 'dogfriendly': reservatie.geef_eind_plaats(),
-             'catfriendly': reservatie.geef_afstand(), 'childfriendly': reservatie.geef_afstand(),'gardenreq': reservatie.geef_afstand(),
-             'hug': reservatie.geef_afstand(),'training': reservatie.geef_afstand(),'BCD': reservatie.geef_afstand(),'score': reservatie.geef_afstand(),}, ignore_index=True)
-             
-             nieuwe_hond = Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD)
-        self.__recommender_data = self.__recommender_data.append({'dog_id': nieuwe_hond.give_id(), 'name': nieuwe_hond.give_name(),
-             'size': nieuwe_hond.give_size(), 'sex': nieuwe_hond.give_sex(),
-             'age': nieuwe_hond.give_age(), 'dogfriendly': nieuwe_hond.give_dogfriendly(),
-             'catfriendly': nieuwe_hond.give_catfriendly(), 'childfriendly': nieuwe_hond.give_childfriendly(),'gardenreq': nieuwe_hond.give_gardenreq(),
-             'hug': nieuwe_hond.give_hug(),'training': nieuwe_hond.give_training(),'BCD': nieuwe_hond.give_BCD(),'score': nieuwe_hond.g(),}, ignore_index=True)
-        return nieuwe_hond
-'''
-
-
 
 print('----------')
 
