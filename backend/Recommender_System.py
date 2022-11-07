@@ -111,7 +111,7 @@ for input, gewicht in inputdata.items():
 
 
 
-
+print(hello)
 print('Dit zijn de beste honden gegeven uw antwoorden: ')
 print('\n')
 print(groep9.give_top4())
