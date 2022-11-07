@@ -57,6 +57,12 @@ class Databank:
             if dog['dog_id'] == id:
                 return df.loc[row, 'name']
 
+    def give_dog_data(self, naam):
+        df = self.__recommender_data
+        for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
+            if dog['name'] == naam:
+                return df.loc[row, :]
+
 
     def give_data(self):
         return self.__recommender_data
@@ -83,20 +89,26 @@ groep9.create_dog()
 # groep9.add_points(groep9.give_id('Bibi'), 14) #probleem is dat elke keer een nieuwe ID werd gegenereerd
 # print(groep9.give_data())
 
-inputdata = ['Rue', 'Middel', 'Jong', 'Rue', 'Nee', 'enkel volwassenen', 'Ja', 'onbelangrijk', 'Ja', 'Ja']
+inputdata = {'Rue':0, 'Middel':58, 'Jong':45, 'Rue':20, 'Nee':12, 'enkel volwassenen':0, 'Ja':100, 'onbelangrijk':80, 'Ja':0, 'Ja':0}
 
 #V1,2,3 8,9,10 hebben een gewicht
 #V4,5,6,7 hebben geen gewicht
 
 
 #onze recommender
-for input in inputdata:
+for input, gewicht in inputdata.items():
     for row, dog in groep9.give_data().iterrows(): #we gaan door elke hond in onze database
-        if input == dog['sex'] or input == dog['size'] or input == dog['age'] or input == dog['petfriendly']:
-            groep9.add_points(dog['dog_id'],1)
+        if gewicht != 0:
 
-        if input == dog['dogfriendly']:
+            if input == dog['sex'] or input == dog['size'] or input == dog['age'] or input == dog['petfriendly']:
+                groep9.add_points(dog['dog_id'], gewicht/50)
+
+            if input == dog['dogfriendly']:
+                groep9.add_points(dog['dog_id'], gewicht/50)
+
+        else:
             groep9.add_points(dog['dog_id'], 1)
+
 
 
 
@@ -106,3 +118,4 @@ print(groep9.give_top4())
 print('The end')
 
 
+#print(groep9.give_dog_data('Marie'))
