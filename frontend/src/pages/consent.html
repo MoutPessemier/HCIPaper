@@ -10,6 +10,31 @@
     <title>HondenMatcher | Consent</title>
   </head>
   <body>
-    <a id="consent-btn" class="btn btn-primary center">Ga van start!</a>
+    <div class="fluid-container py-4 px-3 mx-auto consent-container">
+      <h1 class="text-center">Geef nog even jouw toestemming</h1>
+      <p class="text-center consent">
+        Door “Ik ga akkoord” aan te vinken en door te gaan, doet u mee aan een onderzoek van studenten van de KU Leuven
+        om aanbevelingssystemen te optimaliseren. De antwoorden die u invult om uw matches te verkrijgen worden
+        onmiddellijk verwerkt en niet opgeslagen in onze database. Enkel de data van uw tevredenheid en uw gespendeerde
+        tijd worden bijgehouden in kader van het onderzoek. We zullen niet vragen naar persoonlijke gegevens en dus geen
+        persoonlijke data opslaan. Het doel van deze studie is om de aanbevelingen van adoptiehonden te optimaliseren,
+        om uiteindelijk zowel de medewerkers van het asiel als de potentiële adoptant wat tijd en moeite te besparen.
+        Deze studie werd beoordeeld en goedgekeurd door de Sociaal-Maatschappelijke Ethische Commissie (SMEC) van KU
+        Leuven (goedkeuringsnummer in te vullen). Voor eventuele klachten of andere bezorgdheden omtrent ethische
+        aspecten van deze studie kan ik contact opnemen met SMEC:
+        <a href="mailto:smec@kuleuven.be" style="display: inline !important">smec@kuleuven.be</a>
+        <br />
+        <br />
+        U staat vrij om op elk moment te stoppen, deelname is niet verplicht.
+      </p>
+    </div>
+    <div class="fluid-container py-4 px-3 mx-auto consent-checkbox-container">
+      <p class="text-center consent">Klik op ‘ik ga akkoord’ om akkoord te gaan en verder te gaan naar uw matches!</p>
+      <div class="center">
+        <input class="form-check-input mt-0" type="checkbox" value="" id="consent" />
+        <label for="consent">Ik ga akkoord</label>
+      </div>
+    </div>
+    <a id="consent-btn" class="btn btn-primary center disabled" aria-disabled="true">Ga van start!</a>
   </body>
 </html>

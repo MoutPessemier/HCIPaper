@@ -31,6 +31,10 @@ p {
   &.bold {
     font-weight: bold;
   }
+  &.consent {
+    max-width: 40em;
+    margin: 0 auto;
+  }
 }
 
 a {
@@ -45,6 +49,10 @@ a {
 }
 
 div {
+  &.center {
+    margin: 0 auto;
+  }
+
   &.form-container {
     display: flex !important;
     flex-direction: column !important;
@@ -72,6 +80,15 @@ div {
       margin-top: 1em !important;
       justify-content: space-between !important;
     }
+  }
+
+  &.consent-container {
+    margin: 1em auto !important;
+  }
+
+  &.consent-checkbox-container {
+    display: flex;
+    flex-direction: column;
   }
 }
 
