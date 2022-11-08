@@ -70,12 +70,13 @@ div {
   }
 
   &.radio-container {
-    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
   }
 
   &.importance-container {
     display: flex !important;
     flex-direction: row !important;
+    margin-top: 1.5em;
     &.sp-bw {
       margin-top: 1em !important;
       justify-content: space-between !important;
