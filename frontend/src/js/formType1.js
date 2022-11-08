@@ -43,15 +43,22 @@ const init = () => {
       Q4: { value: q4v, weight: 50 },
       Q5: { value: q5v, weight: 50 },
     };
-    console.log(JSON.stringify(body));
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(body),
     };
-    //fetch();
-    //window.location.href = `/pages/suggestions.html`;
+    // TODO: test end point
+    fetch('', options)
+      .then(res => {
+        console.log(res);
+        //TODO: set reference id in localStorage
+        //document.localStorage.setAttribute('referenceId', res);
+        window.location.href = `/pages/suggestions.html`;
+      })
+      .catch(res => console.log(res));
   });
 };
 
