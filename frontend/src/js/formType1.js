@@ -1,7 +1,7 @@
 const getFormValueForQuestion = name => {
   const radios = document.getElementsByName(name);
   const radio = Array.from(radios).filter(radio => radio.checked)[0];
-  return radio.value;
+  return { value: radio.value, weight: 50 };
 };
 
 const canSubmit = () => {
@@ -27,21 +27,21 @@ const init = () => {
     }
   });
   submitBtn.addEventListener('click', e => {
-    const q1v = getFormValueForQuestion('q1');
-    const q2v = getFormValueForQuestion('q2');
-    const q3v = getFormValueForQuestion('q3');
-    const q4v = getFormValueForQuestion('q4');
-    const q5v = getFormValueForQuestion('q5');
+    const q1 = getFormValueForQuestion('q1');
+    const q2 = getFormValueForQuestion('q2');
+    const q3 = getFormValueForQuestion('q3');
+    const q4 = getFormValueForQuestion('q4');
+    const q5 = getFormValueForQuestion('q5');
     const endTime = new Date().toString().split(' ')[4];
     const startTime = localStorage.getItem('startTime');
     const body = {
       startTime,
       endTime,
-      Q1: { value: q1v, weight: 50 },
-      Q2: { value: q2v, weight: 50 },
-      Q3: { value: q3v, weight: 50 },
-      Q4: { value: q4v, weight: 50 },
-      Q5: { value: q5v, weight: 50 },
+      Q1: q1,
+      Q2: q2,
+      Q3: q3,
+      Q4: q4,
+      Q5: q5,
     };
     const options = {
       method: 'POST',
