@@ -146,7 +146,6 @@ class Databank:
     def give_top4(self):
         max_value = 0
         self.search_dupl() #om honden die samengezet moeten worden dezelfde punten gaan krijgen, assumptie: enkel duplicates in data indien ze samen horen
-        df= self.__recommender_data
         for row, data in self.__recommender_data.iterrows():
             if max_value < self.__recommender_data.loc[row, 'score']:
                 max_value = self.__recommender_data.loc[row, 'score']
