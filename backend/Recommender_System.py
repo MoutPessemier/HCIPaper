@@ -49,12 +49,12 @@ class Databank:
                 # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
                 if vraagnum == 0: #Merk op dat de indices begint bij 0 en NIET 1
                     if dog['sex'] == input:  # V1: We willen absoluut de juiste geslacht honden, daarom 2 als basis
-                        self.add_points(dog['dog_id'], 2 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
 
                 # VRAAG 2: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
                 if vraagnum == 1:
                     if dog['size'] == input:  # V2: We willen ook zeker de juiste grootte, maar minder belangrijk dan geslacht
-                        self.add_points(dog['dog_id'], 1.5 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
 
                 #VRAAG 4: Heeft u reeds (een) andere hond(en)? (eigenschap: ja, reu, teef, nee)
                 #Note to self: te harde codering!
@@ -144,16 +144,20 @@ class Databank:
         return self.__recommender_data['score']
 
     def give_top4(self):
-        df = self.__recommender_data
-        for row, data in df.iterrows(): #correctie op het feit dat gewichten door vraag 1 en 2 overbelast zou zijn.
-            if data['score'] > 10:
-                self.__recommender_data.loc[row, 'score'] = 10 #want 10 is de schaal waarmee we werken
+        max_value = 0
+        self.search_dupl() #om honden die samengezet moeten worden dezelfde punten gaan krijgen, assumptie: enkel duplicates in data indien ze samen horen
+        df= self.__recommender_data
+        for row, data in self.__recommender_data.iterrows():
+            if max_value < self.__recommender_data.loc[row, 'score']:
+                max_value = self.__recommender_data.loc[row, 'score']
+            else:
+                continue
 
+        for row, data in self.__recommender_data.iterrows():
+            x = 10 * (self.__recommender_data.loc[row, 'score'] / max_value) #als we een schaal op 10 willen is deze normalizatie noodzakelijk omdat de gewichten zorgen voor onbalans
+            self.__recommender_data.loc[row, 'score'] = round(x, 3) #want 10 is de schaal waarmee we werken
 
-#TODO: Er moet nog een manier gevonden worden om Max en Sky samen aan te bieden
-
-
-        return df.sort_values(by=['score'], ascending=False).head(4)
+        return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
 
     def search_dupl(self):
 
@@ -164,5 +168,4 @@ class Databank:
                     break
                 else:
                     if dog1['name']== dog2['name']:
-                        count+=1
-                        return dog1['name']
+                        self.__recommender_data.loc[row1, 'score'] = self.__recommender_data.loc[row2, 'score']
