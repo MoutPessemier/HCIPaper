@@ -1,10 +1,31 @@
 import Recommender_System as R
 import pandas as pd
+from flask import Flask
 
+from flask import request
+from flask_restful import Resource, Api, reqparse
+
+#Dit is de REST API
+"""
+app = Flask(__name__)
+@app.route('/recommendations')
+def index():
+    Sys = R.Databank()
+    Sys.create_dog()
+    antwoorden = ['Teef', 'Eerder klein', 'Gouden senioren jaren (2014 en ouder)', 'Ja', 'Nee',
+                  'Enkel kinderen boven 12 jaar', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk','Nee']  # Met deze antwoorden vind je Max en Sky
+    gewichten = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100]  # je kan spelen met de gewichten, 50 wilt zeggen neutraal.
+    d = {'antwoorden': antwoorden, 'gewichten': gewichten}
+    inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
+    Sys.make_recommendation(inputdata)
+    return Sys.give_top4()
+if __name__ == "__main__":
+    app.run()
+"""
 
 #README: om het programma te testen moet je deze code runnen. dus run 'main'!
 
-#REST API komt ook hier
+
 
 #System setup
 Sys = R.Databank()
