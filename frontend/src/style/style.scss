@@ -27,9 +27,20 @@ p {
   &.question {
     font-size: 16px !important;
     margin-right: 2em !important;
+    margin-bottom: 0.5em !important;
   }
   &.bold {
     font-weight: bold;
+  }
+  &.left {
+    float: left;
+  }
+  &.right {
+    float: right;
+  }
+  &.consent {
+    max-width: 40em;
+    margin: 0 auto;
   }
 }
 
@@ -45,33 +56,41 @@ a {
 }
 
 div {
+  &.w-280 {
+    width: 280px;
+  }
+  &.center {
+    margin: 0 auto;
+  }
   &.form-container {
     display: flex !important;
     flex-direction: column !important;
   }
-
   &.cards-container {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
   }
-
   &.q-container {
-    margin-top: 0.5em !important;
     margin-bottom: 1.5em !important;
   }
-
   &.radio-container {
-    margin-top: 0.5em !important;
+    margin-bottom: 0.25em !important;
   }
-
   &.importance-container {
     display: flex !important;
     flex-direction: row !important;
-    &.sp-bw {
-      margin-top: 1em !important;
-      justify-content: space-between !important;
-    }
+    margin-bottom: 1.75em;
+  }
+  &.sp-bw {
+    justify-content: space-between !important;
+  }
+  &.consent-container {
+    margin: 1em auto !important;
+  }
+  &.consent-checkbox-container {
+    display: flex;
+    flex-direction: column;
   }
 }
 
