@@ -22,7 +22,7 @@ Sys.make_recommendation(inputdata)
 
 #TODO: output naar JSON schrijven
 #We geven de data weer/output naar JSON
-print('Dit zijn de beste honden gegeven uw antwoorden: ')
+print('Dit zijn de beste honden gegeven uw antwoorden: ') #Dit is slechts een test
 print('\n')
 print(Sys.give_top4())
 print('The end')

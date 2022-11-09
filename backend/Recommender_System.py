@@ -153,7 +153,7 @@ class Databank:
 #TODO: Er moet nog een manier gevonden worden om Max en Sky samen aan te bieden
 
 
-        return df.sort_values(by=['score'], ascending=False).head(20)
+        return df.sort_values(by=['score'], ascending=False).head(4)
 
     def search_dupl(self):
 
