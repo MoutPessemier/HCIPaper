@@ -94,7 +94,7 @@ groep9 = Databank()
 groep9.create_dog()
 
 
-inputdata = {'Teef':80, 'Middelmaatje':58, 'Eerder jong (2020 en jonger)':0, 'Ja, een reu':20, 'Ja':12, 'Enkel kinderen boven 12 jaar':0, 'Onbekend':100, 'Onbekend':80, 'Ja':0, 'Ja':50}
+inputdata = {'Teef':80, 'Middelmaatje':58, 'Eerder jong (2020 en jonger)':100, 'Ja, een reu':20, 'Ja':12, 'Enkel kinderen boven 12 jaar':0, 'Onbekend':100, 'Onbekend':80, 'Ja':0, 'Ja':50}
 
 
 
