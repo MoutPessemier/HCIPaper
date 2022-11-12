@@ -1,6 +1,6 @@
 class Dog:
 
-    def __init__(self, id, name, sex, size, age, dogfriendly=True, catfriendly=True, childfriendly=True, gardenreq=True,
+    def __init__(self, id, name, sex, size, age, dogfriendly=True, petfriendly=True, childfriendly=True, gardenreq=True,
                  hug=True, training=True, BCD=False, Description= '', Image= '', score=0):
 
         self.__id = id
@@ -9,7 +9,7 @@ class Dog:
         self.__sex = sex
         self.__age = age
         self.__dogfriendly = dogfriendly
-        self.__catfriendly = catfriendly
+        self.__petfriendly = petfriendly
         self.__childfriendly = childfriendly
         self.__gardenreq = gardenreq
         self.__hug = hug
@@ -18,9 +18,6 @@ class Dog:
         self.__Description= Description
         self.__image = Image
         self.__score = score
-
-
-
 
     def give_records(self):
         return print("Het dier noemt" + " " + self.give_name() + " en heeft volgnummer " + str(self.give_id()) + ". \n" +self.give_name() + " is een " + self.give_sex() + " met " + self.give_size() + " gestalte. \n" + self.give_dogfriendly() + "\n"+ self.give_catfriendly()+ "\n"+ self.give_childfriendly() +"\n" + self.give_gardenreq() +"\n"+ self.give_hug() +"\n"+ self.give_training() +"\n"+ self.give_BCD())

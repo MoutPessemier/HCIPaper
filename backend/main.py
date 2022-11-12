@@ -9,16 +9,10 @@ from flask_restful import Resource, Api, reqparse
 """
 app = Flask(__name__)
 @app.route('/recommendations')
-def index():
-    Sys = R.Databank()
-    Sys.create_dog()
-    antwoorden = ['Teef', 'Eerder klein', 'Gouden senioren jaren (2014 en ouder)', 'Ja', 'Nee',
-                  'Enkel kinderen boven 12 jaar', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk','Nee']  # Met deze antwoorden vind je Max en Sky
-    gewichten = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100]  # je kan spelen met de gewichten, 50 wilt zeggen neutraal.
-    d = {'antwoorden': antwoorden, 'gewichten': gewichten}
-    inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
-    Sys.make_recommendation(inputdata)
-    return Sys.give_top4()
+
+@app.route('/hello')
+def index(input):
+    return "Hello " + input
 if __name__ == "__main__":
     app.run()
 """

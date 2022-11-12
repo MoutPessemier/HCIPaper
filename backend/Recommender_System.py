@@ -9,7 +9,7 @@ import Dog as D
 class Databank:
 
     def __init__(self):
-        self.__recommender = []  # lijst van reservaties maken; handig bij opvragen van gegevens
+        self.__dogs = []  # lijst van reservaties maken; handig bij opvragen van gegevens
         self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','score'])  # dataframe maken; handig voor doorzoeken
 
     def create_dog(self):
@@ -21,14 +21,14 @@ class Databank:
                                    dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'],
                                    dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'])
 
-    def append_dog_data(self, id, name, sex, size, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, score= 0):
+    def append_dog_data(self, id, name, sex, size, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, score= 0):
 
-        nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, catfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image)
+        nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image)
 
-        self.__recommender.append(nieuwe_hond)
+        self.__dogs.append(nieuwe_hond)
 
         new_row = pd.Series({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
-             'age': age, 'dogfriendly': dogfriendly, 'catfriendly': catfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
+             'age': age, 'dogfriendly': dogfriendly, 'petfriendly': petfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
              'hug': hug,'training': training,'BCD': BCD,'score': score,'Description': Description, 'image': image})
 
         self.__recommender_data = pd.concat([self.__recommender_data, new_row.to_frame().T], ignore_index=True) #aangezien een pd.series 1 kolom geeft met de vragen als rij moeten we transponern met .T
@@ -143,6 +143,16 @@ class Databank:
     def give_score(self):
         return self.__recommender_data['score']
 
+    def search_dupl(self):
+        for row1, dog1 in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
+            count =1
+            for row2, dog2 in self.__recommender_data.iterrows():
+                if row1==row2:
+                    break
+                else:
+                    if dog1['name']== dog2['name']:
+                        self.__recommender_data.loc[row1, 'score'] = self.__recommender_data.loc[row2, 'score']
+
     def give_top4(self):
         max_value = 0
         self.search_dupl() #om honden die samengezet moeten worden dezelfde punten gaan krijgen, assumptie: enkel duplicates in data indien ze samen horen
@@ -158,12 +168,3 @@ class Databank:
 
         return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
 
-    def search_dupl(self):
-        for row1, dog1 in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            count =1
-            for row2, dog2 in self.__recommender_data.iterrows():
-                if row1==row2:
-                    break
-                else:
-                    if dog1['name']== dog2['name']:
-                        self.__recommender_data.loc[row1, 'score'] = self.__recommender_data.loc[row2, 'score']
