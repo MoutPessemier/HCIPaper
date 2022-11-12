@@ -91,6 +91,7 @@ class Databank:
                     if dog['gardenreq'] == input and input == "Ja":  # V7, indien input "ja" dan alle honden een punt, equivalent als zeggen dat niemand iets krijgt.
                         self.give_all()
 
+
                 # --------
                 # VRAAG 8: Zoekt u een echte knuffelbeer? (eigenschap: default, ja)
                 if vraagnum == 7:
