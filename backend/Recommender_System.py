@@ -159,7 +159,6 @@ class Databank:
         return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
 
     def search_dupl(self):
-
         for row1, dog1 in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
             count =1
             for row2, dog2 in self.__recommender_data.iterrows():
