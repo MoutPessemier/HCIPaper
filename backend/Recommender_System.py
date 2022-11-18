@@ -46,32 +46,54 @@ class Databank:
 
             for row, dog in self.give_data().iterrows():  # we gaan door elke hond in onze database
 
+
                 # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
                 if vraagnum == 0: #Merk op dat de indices begint bij 0 en NIET 1
                     if dog['sex'] == input:  # V1: We willen absoluut de juiste geslacht honden, daarom 2 als basis
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 3 + ((gewicht - 60) / 50))
+                        if dog['name'] == "Rita":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
-                # VRAAG 2: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
+                # VRAAG 2: Welk grootte prefereert u?  (eigenschap: geslacht → reu, teef)
                 if vraagnum == 1:
                     if dog['size'] == input:  # V2: We willen ook zeker de juiste grootte, maar minder belangrijk dan geslacht
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
+
+                # VRAAG 3: Leeftijd?  (eigenschap: geslacht → reu, teef)
+                if vraagnum == 2:
+                    if dog['age'] == input:  # V2: We willen ook zeker de juiste grootte, maar minder belangrijk dan geslacht
+                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
                 #VRAAG 4: Heeft u reeds (een) andere hond(en)? (eigenschap: ja, reu, teef, nee)
                 #Note to self: te harde codering!
                 if vraagnum == 3:
                     if dog['dogfriendly'] == input and input == 'Ja, een reu':
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
                     if dog['dogfriendly'] == input and input == 'Ja, een teef':
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
                     if dog['dogfriendly'] == input and input == 'Ja, meerdere honden':
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
                     if dog['dogfriendly'] == input and input == 'Nee':
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
-                # VRAAG 3 en 5 want deze vragen hebben dezelfde puntenlogica en 1/1 matching met de dataset
-                if vraagnum in [2,4]:
-                    if dog['age'] == input or dog['petfriendly'] == input:  # V3: Gewicht beslissen mensen zelf
+                # VRAAG 5 want deze vragen hebben dezelfde puntenlogica en 1/1 matching met de dataset
+                if vraagnum == 4:
+                    if dog['petfriendly'] == input:  # V3: Gewicht beslissen mensen zelf
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
 #-------- Vanaf hier speciale logica vragen:
                 # Note to self: te harde codering!
@@ -79,8 +101,11 @@ class Databank:
                 if vraagnum == 5:
                     if dog['childfriendly'] == input and input == "Enkel kinderen boven 12 jaar":
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
                     else:  # V6 als er dus enkel volwassene zijn krijgt iedereen een punt
-                        self.give_all()
+                        #self.give_all()
+                        continue
 
 
                 # --------
@@ -88,8 +113,11 @@ class Databank:
                 if vraagnum == 6:
                     if dog['gardenreq'] == input and input == "Nee":  # V7, indien input "nee" dan enkel honden met
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
                     if dog['gardenreq'] == input and input == "Ja":  # V7, indien input "ja" dan alle honden een punt, equivalent als zeggen dat niemand iets krijgt.
-                        self.give_all()
+                        #self.give_all()
+                        continue
 
 
                 # --------
@@ -97,24 +125,30 @@ class Databank:
                 if vraagnum == 7:
                     if dog['hug'] == input and input == "Ja, knuffelkontjes!":  # V8
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
-                    else:
-                        self.give_all()
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
+                    # else:
+                    #     self.give_all()
 
                 # --------
                 # VRAAG 9: Zou u graag training en/of hondensport doen met de hond? (eigenschap: default, training/sport)
                 if vraagnum == 8:
                     if dog['training'] == input and input == "Ja, graag!":  # V9
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
-                    else:
-                        self.give_all()
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
+                    # else:
+                    #     self.give_all()
 
                 # --------
                 #VRAAG 10: Prefereert u een hond die getraind wordt via het Belgian Cell Dogs project?* (eigenschap: default, BCDp)
                 if vraagnum == 9:
                     if dog['BCD'] == input and input == "Ja":  # V10
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
-                    else:
-                        self.give_all()
+                        if dog['name'] == "r":
+                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
+                    # else:
+                    #     self.give_all()
 
     def give_id(self, naam):
         df = self.__recommender_data
@@ -164,7 +198,9 @@ class Databank:
                 continue
 
         for row, data in self.__recommender_data.iterrows():
+            #print(max_value)
             x = 10 * (self.__recommender_data.loc[row, 'score'] / max_value) #als we een schaal op 10 willen is deze normalizatie noodzakelijk omdat de gewichten zorgen voor onbalans
+            #x = self.__recommender_data.loc[row, 'score']
             self.__recommender_data.loc[row, 'score'] = round(x, 3) #want 10 is de schaal waarmee we werken
 
         return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)

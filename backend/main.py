@@ -7,7 +7,6 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-
 class RestAPI:
 
     def make_json(self, dataframe):
@@ -56,11 +55,14 @@ if __name__ == "__main__":
 #README: om het programma te testen moet je deze code runnen. dus run 'main'!
 
 
+
 """
+Sys = R.Databank()
+Sys.create_dog()
 #TODO: Inlezing van data via JSON
 #OPM: dit is een test input en volledig fictief / Voor de meeste input zullen een paar honden dezelfde scores hebben, dit is normaal aangezien de dataset beperkt is en dus niet elke hond uniek
-antwoorden = ['Teef', 'Eerder klein', 'Gouden senioren jaren (2014 en ouder)', 'Ja, een reu', 'Nee', 'Enkel kinderen boven 12 jaar', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Nee'] #Met deze antwoorden vind je Max en Sky
-gewichten = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100] #je kan spelen met de gewichten, 50 wilt zeggen neutraal.
+antwoorden = ['Reu', 'Eerder groot', 'Gouden senioren jaren (2014 en ouder)', 'Nee', 'Nee', 'Nee', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Nee'] #Met deze antwoorden vind je Max en Sky
+gewichten = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50] #je kan spelen met de gewichten, 50 wilt zeggen neutraal.
 d= {'antwoorden': antwoorden, 'gewichten': gewichten}
 inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
 
@@ -78,9 +80,5 @@ print(Sys.give_top4())
 print('\n')
 print('The end')
 """
-"""
-L= {"point1": 5, "point2": 7, "point3":2}
 
-for x, y in L.items():
-    print(x)
-    print(y)"""
+#TODO: Recommendation oplsaan met een ID bij eerste request. Bij tweede request via ID dezelfde recommendation teruggeven.
