@@ -45,21 +45,25 @@ const init = () => {
     };
     const options = {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(body),
     };
-    // TODO: test end point
-    fetch('', options)
-      .then(res => {
-        console.log(res);
+    //TODO: test end point
+    fetch('http://127.0.0.1:5001/recommender/', options)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
         //TODO: set reference id in localStorage
-        //document.localStorage.setAttribute('referenceId', res);
-        window.location.href = `/pages/suggestions.html`;
+        //document.localStorage.setAttribute('referenceId', data.id);
+        //window.location.href = `/pages/suggestions.html`;
       })
-      .catch(res => console.log(res));
+      .catch(error => console.log('ERROR:: ', error));
   });
 };
+
 
 window.onload = () => init();

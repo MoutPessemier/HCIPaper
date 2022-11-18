@@ -11,6 +11,7 @@ class Databank:
     def __init__(self):
         self.__dogs = []  # lijst van reservaties maken; handig bij opvragen van gegevens
         self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','score'])  # dataframe maken; handig voor doorzoeken
+        self.__recommendations = pd.DataFrame(columns=['Case ID', 'name', 'description', 'image'])
 
     def create_dog(self):
 

@@ -25,9 +25,7 @@ class RestAPI:
 
     def post(self, jsonObject):
         # System setup
-
-        Sys = R.Databank()
-        Sys.create_dog()
+        print('in post')
         antwoorden = []
         gewichten = []
 
@@ -40,14 +38,28 @@ class RestAPI:
         inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
         Sys.make_recommendation(inputdata)
 
-        return jsonify(self.make_json(Sys.give_top4()))
+        return jsonify(self.make_json(Sys.give_top4())), 200, {'Access-Control-Allow-Origin': '*'}
+
+    def get(self):
+        print('got here')
+        return {'res': "hey, Nam"}, 200, {'Access-Control-Allow-Origin': '*'}
 
 
-@app.route('/recommender', methods=['POST'])
+@app.route('/recommender/', methods=['POST'])
 def recommender():
+    Sys = R.Databank()
+    Sys.create_dog()
     REST = RestAPI()
-    return REST.post(request.get_json())
+    print('recommender binnengegaan')
+    data = request.get_json()
+    print('Dit is de inkomende data', data)
+    return 'ok'
 
+@app.route('/test/', methods=['GET'])
+def test():
+    REST = RestAPI()
+    print('test binnengegaan')
+    return REST.get()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001", debug=True)
