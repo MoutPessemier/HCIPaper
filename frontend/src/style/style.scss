@@ -95,7 +95,7 @@ div {
   &.importance-container {
     display: flex !important;
     flex-direction: row !important;
-    margin-bottom: 1.75em;
+    margin-bottom: 2.5em;
   }
   &.sp-bw {
     justify-content: space-between !important;
@@ -135,7 +135,7 @@ button {
 footer {
   background-color: rgb(31, 31, 31);
   color: #fff;
-  height: 125px;
+  min-height: 125px;
   padding: 2em;
   a {
     display: inline !important;
