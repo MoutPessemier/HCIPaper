@@ -29,7 +29,7 @@ class Databank:
 
         new_row = pd.Series({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
              'age': age, 'dogfriendly': dogfriendly, 'petfriendly': petfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
-             'hug': hug,'training': training,'BCD': BCD,'score': score,'Description': Description, 'image': image})
+             'hug': hug,'training': training,'BCD': BCD,'score': score,'description': Description, 'image': image})
 
         self.__recommender_data = pd.concat([self.__recommender_data, new_row.to_frame().T], ignore_index=True) #aangezien een pd.series 1 kolom geeft met de vragen als rij moeten we transponern met .T
 
