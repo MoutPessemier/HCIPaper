@@ -5,17 +5,20 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel --open",
-    "build": "parcel build"
+    "build": "parcel build",
+    "deploy": "parcel build; firebase deploy"
   },
   "author": "Mout Pessemier",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
-    "parcel": "^2.7.0"
+    "parcel": "^2.7.0",
+    "process": "^0.11.10"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.2",
-    "fetch": "^1.1.0"
+    "fetch": "^1.1.0",
+    "firebase": "^9.14.0"
   }
 }

@@ -1,5 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
 img {
   max-width: 250px !important;
   &.circle {
@@ -41,6 +51,11 @@ p {
   &.consent {
     max-width: 40em;
     margin: 0 auto;
+  }
+  &.center {
+    text-align: center;
+    position: relative;
+    bottom: -15px;
   }
 }
 
@@ -92,6 +107,12 @@ div {
     display: flex;
     flex-direction: column;
   }
+  &.footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 input[type='range'] {
@@ -109,4 +130,21 @@ button {
 
 .float-left {
   float: left !important;
+}
+
+footer {
+  background-color: rgb(31, 31, 31);
+  color: #fff;
+  height: 125px;
+  padding: 2em;
+  a {
+    display: inline !important;
+    color: #698470;
+    &:visited {
+      color: #698470;
+    }
+    &:hover {
+      color: #698470;
+    }
+  }
 }
