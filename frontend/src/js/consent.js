@@ -1,5 +1,5 @@
 const init = () => {
-  checkbox = document.getElementById('consent');
+  const checkbox = document.getElementById('consent');
   const aBtn = document.getElementById('consent-btn');
   checkbox.addEventListener('change', e => {
     if (e.target.checked) {
