@@ -41,7 +41,7 @@ class RestAPI:
 def recommender():
     REST = RestAPI()
     print('recommender binnengegaan')
-    data = request.get_json()
+    data = request.data
     print('Dit is de inkomende data', data)
     return REST.give_id(data)
 
@@ -49,7 +49,7 @@ def recommender():
 def test():
     REST = RestAPI()
     print('test binnengegaan')
-    id = request.get_json()
+    id = request.data
     print(id)
     return REST.give_recommendation(id)
 

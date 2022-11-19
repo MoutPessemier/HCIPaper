@@ -53,7 +53,7 @@ const init = () => {
       body: JSON.stringify(body),
     };
     //TODO: test end point
-    fetch('http://127.0.0.1:5001/recommender/', options)
+    fetch('http://127.0.0.1:5001/get_id/', options)
       .then(res => res.json())
       .then(data => {
         console.log(data);
