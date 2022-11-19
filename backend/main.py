@@ -82,7 +82,7 @@ def recommender():
     #     print('Valuetype', type(value))
     #     print('\n')
 
-    #print(REST.give_id(datajson))
+    print(REST.give_id(datajson)) #zodat de recommendation gemaakt kunnen worden
     return {'id':1}
     #return REST.give_id(datajson)
 
