@@ -4,15 +4,12 @@
 #Tip: if you are commits behind master (as seen on Github): checkout on branch (locally), then pull into current merge from master origin (remote)
 # In order to update branch, checkout into branch (locally), pull into current merge from branch (remote)
 import pandas as pd
-import Dog as D
 from openpyxl import Workbook, load_workbook
 
 class Databank:
 
     def __init__(self):
-        self.__dogs = []  # lijst van reservaties maken; handig bij opvragen van gegevens
         self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','score'])  # dataframe maken; handig voor doorzoeken
-        self.__recommendations = pd.DataFrame(columns=['Case ID', 'name', 'description', 'image'])
 
     def create_dog(self):
 
@@ -25,14 +22,10 @@ class Databank:
 
     def append_dog_data(self, id, name, sex, size, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, score= 0):
 
-        nieuwe_hond = D.Dog(id, name, size, sex, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image)
-
-        self.__dogs.append(nieuwe_hond)
 
         new_row = pd.Series({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
              'age': age, 'dogfriendly': dogfriendly, 'petfriendly': petfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
              'hug': hug,'training': training,'BCD': BCD,'score': score,'description': Description, 'image': image})
-
         self.__recommender_data = pd.concat([self.__recommender_data, new_row.to_frame().T], ignore_index=True) #aangezien een pd.series 1 kolom geeft met de vragen als rij moeten we transponern met .T
 
     def add_points(self, id, score):

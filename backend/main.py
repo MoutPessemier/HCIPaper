@@ -1,12 +1,14 @@
 import Recommender_System as R
 import pandas as pd
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 
 # Test it with this command in terminal:
 # curl -X POST http://localhost:5001/recommender -H 'Content-Type: application/json' -d '{"answers": [ {"answer": "Teef", "weight": 100 }, {"answer": "Eerder klein", "weight": 100 }, {"answer": "Gouden senioren jaren (2014 en ouder)", "weight": 100 }, {"answer": "Ja, een reu", "weight": 100 }, {"answer": "Nee", "weight": 100 }, {"answer": "Enkel kinderen boven 12 jaar", "weight": 100 }, {"answer": "Ja", "weight": 100 }, {"answer": "Ja, knuffelkontjes!", "weight": 100 }, {"answer": "Dat is voor mij niet zo belangrijk", "weight": 100 }, {"answer": "Nee", "weight": 100 } ]}'
 
 app = Flask(__name__)
+CORS(app)
 Sys = R.Databank()
 Sys.create_dog()
 
@@ -41,7 +43,7 @@ class RestAPI:
 def recommender():
     REST = RestAPI()
     print('recommender binnengegaan')
-    data = request.data
+    data = request.get_json()
     print('Dit is de inkomende data', data)
     return REST.give_id(data)
 
@@ -49,7 +51,7 @@ def recommender():
 def test():
     REST = RestAPI()
     print('test binnengegaan')
-    id = request.data
+    id = request.get_json()
     print(id)
     return REST.give_recommendation(id)
 
