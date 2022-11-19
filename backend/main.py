@@ -2,10 +2,12 @@ import Recommender_System as R
 import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import json
+import datetime as dt
 
+#TODO: Endpoint maken zodat de onderzoeksvragen kunnen worden opgeslaan
+#TODO: Timestamps verwerken naar excel
 
-# Test it with this command in terminal:
-# curl -X POST http://localhost:5001/recommender -H 'Content-Type: application/json' -d '{"answers": [ {"answer": "Teef", "weight": 100 }, {"answer": "Eerder klein", "weight": 100 }, {"answer": "Gouden senioren jaren (2014 en ouder)", "weight": 100 }, {"answer": "Ja, een reu", "weight": 100 }, {"answer": "Nee", "weight": 100 }, {"answer": "Enkel kinderen boven 12 jaar", "weight": 100 }, {"answer": "Ja", "weight": 100 }, {"answer": "Ja, knuffelkontjes!", "weight": 100 }, {"answer": "Dat is voor mij niet zo belangrijk", "weight": 100 }, {"answer": "Nee", "weight": 100 } ]}'
 
 app = Flask(__name__)
 CORS(app)
@@ -15,22 +17,34 @@ Sys.create_dog()
 class RestAPI:
 
     def give_id(self, data):
-        # System setup
-        print('in post')
+
         antwoorden = []
         gewichten = []
 
-        for x in data['answers']: #parsing moet nog aangepast worden
+        for key1, value in data.items():
+            if key1 == "startTime" or key1 == "endTime":
+                continue #later bijhouden
 
-            antwoorden.append(x["answer"])
-            gewichten.append(x["weight"])
+            else:
+                for key2, content in value.items():
+                    if key2 == 'value':
+                        antwoorden.append(content)
+                    if key2 == 'weight':
+                        gewichten.append(content)
+                    # print('bij vraag', key)
+                    # print('Dit is de sleutel', question)
+                    # print('Dit is de waarde', content)
+        # print('\n')
+        # print('Inlezen succesvol')
+        # print('dit zijn de antwoorden', antwoorden)
+        # print('dit zijn de gewichten', gewichten)
 
         d = {'antwoorden': antwoorden, 'gewichten': gewichten}
         inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
         Sys.make_recommendation(inputdata) #puntentoekenning
         x = Sys.give_top4() #top 4 eruit halen
         ident = Sys.export_data(x) #schrijven het weg naar excel
-
+        print('This is the return id', ident)
         return jsonify(ident, 200, {'Access-Control-Allow-Origin': '*'})
 
     def give_recommendation(self, id):
@@ -42,10 +56,30 @@ class RestAPI:
 @app.route('/get_id/', methods=['POST'])
 def recommender():
     REST = RestAPI()
-    print('recommender binnengegaan')
-    data = request.get_json()
-    print('Dit is de inkomende data', data)
-    return REST.give_id(data)
+    print('Contact with frontend ok')
+    print('\n')
+    data = request.data
+    # print('Dit is de raw data')
+    # print(data)
+    # print('----')
+    # print('Dit is de json data')
+
+
+    datastr= data.decode("utf-8")
+    datajson= json.loads(datastr)
+    #print(datajson)
+    # print('---')
+    # for key, value in datajson.items():
+    #     print('Key', key)
+    #     print('Keytype', type(key))
+    #     print('\n')
+    #     print('Value', value)
+    #     print('Valuetype', type(value))
+    #     print('\n')
+
+
+    #return {'id':1}
+    return REST.give_id(datajson)
 
 @app.route('/get_recommendation/', methods=['GET'])
 def test():
@@ -85,7 +119,6 @@ x=Sys.give_top4()
 ident = Sys.export_data(x)
 #Sys.read_data(140677493168464)
 print(Sys.read_data(ident))
-
 
 
 """

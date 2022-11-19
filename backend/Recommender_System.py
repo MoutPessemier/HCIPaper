@@ -189,8 +189,8 @@ class Databank:
         for row, data in self.__recommender_data.iterrows():
             if max_value < self.__recommender_data.loc[row, 'score']:
                 max_value = self.__recommender_data.loc[row, 'score']
-            else:
-                continue
+            if max_value == 0:
+                max_value+=1
 
         for row, data in self.__recommender_data.iterrows():
             #print(max_value)
@@ -212,7 +212,7 @@ class Databank:
     def export_data(self, lijst):
         workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
-        identificatie= id(1092) #elke run zal er een andere id gegeneert worden obv van dit getal
+        identificatie= id(lijst) #elke run zal er een andere id gegeneert worden obv van dit getal
         inzet = [identificatie] #meer leren of IDENT ID
         for dicts in lijst:
             for key, value in dicts.items():
