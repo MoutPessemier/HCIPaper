@@ -29,12 +29,12 @@ class RestAPI:
         x = Sys.give_top4() #top 4 eruit halen
         ident = Sys.export_data(x) #schrijven het weg naar excel
 
-        return jsonify(ident, 200, {'Access-Control-Allow-Origin': '*'}
+        return jsonify(ident, 200, {'Access-Control-Allow-Origin': '*'})
 
     def give_recommendation(self, id):
         print('got here')
         data = Sys.read_data(id)
-        return jsonify(data, 200, {'Access-Control-Allow-Origin': '*'}
+        return jsonify(data, 200, {'Access-Control-Allow-Origin': '*'})
 
 
 @app.route('/get_id/', methods=['POST'])
