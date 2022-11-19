@@ -55,7 +55,7 @@ class RestAPI:
     def give_recommendation(self, id):
         print('got here')
         data = Sys.read_data(id)
-        return jsonify(data, 200, {'Access-Control-Allow-Origin': '*'})
+        return jsonify(data)
 
 
 @app.route('/get_id/', methods=['POST'])
@@ -82,9 +82,8 @@ def recommender():
     #     print('Valuetype', type(value))
     #     print('\n')
 
-    #print(REST.give_id(datajson))
-    return {'id':1}
-    #return REST.give_id(datajson)
+    print(REST.give_id(datajson))
+    return REST.give_id(datajson)
 
 @app.route('/get_recommendation/', methods=['GET'])
 def test():
