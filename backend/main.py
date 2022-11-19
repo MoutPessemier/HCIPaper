@@ -18,7 +18,7 @@ class RestAPI:
         antwoorden = []
         gewichten = []
 
-        for x in data['answers']:
+        for x in data['answers']: #parsing moet nog aangepast worden
 
             antwoorden.append(x["answer"])
             gewichten.append(x["weight"])
@@ -50,6 +50,7 @@ def test():
     REST = RestAPI()
     print('test binnengegaan')
     id = request.get_json()
+    print(id)
     return REST.give_recommendation(id)
 
 if __name__ == "__main__":
