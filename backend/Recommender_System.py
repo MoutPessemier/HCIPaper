@@ -226,8 +226,3 @@ class Databank:
 
 
 
-
-
-
-
-

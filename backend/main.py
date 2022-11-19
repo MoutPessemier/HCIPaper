@@ -41,17 +41,15 @@ class RestAPI:
         return {"id":ident}
 
     def give_recommendation(self, id):
-        print('got here')
-        data = Sys.read_excel(id)
-        return jsonify(data, 200, {'Access-Control-Allow-Origin': '*'})
+        for values in id.values():
+            data = Sys.read_excel(values)
+        return {"recommendations": data}
 
 
 @app.route('/get_id/', methods=['POST'])
 def recommender():
     REST = RestAPI()
     data = request.data
-
-
     datastr= data.decode("utf-8")
     datajson= json.loads(datastr)
 
@@ -61,7 +59,7 @@ def recommender():
 def test():
     REST = RestAPI()
     print('test binnengegaan')
-    id = request.get_json()
+    id = json.loads(request.data.decode("utf-8"))
     print(id)
     return REST.give_recommendation(id)
 

@@ -45,7 +45,6 @@ const init = () => {
     };
     const options = {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -64,6 +63,5 @@ const init = () => {
       .catch(error => console.log('ERROR:: ', error));
   });
 };
-
 
 window.onload = () => init();
