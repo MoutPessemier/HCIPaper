@@ -41,7 +41,6 @@ class Databank:
 
             for row, dog in self.give_data().iterrows():  # we gaan door elke hond in onze database
 
-
                 # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
                 if vraagnum == 0: #Merk op dat de indices begint bij 0 en NIET 1
                     if dog['sex'] == input:  # V1: We willen absoluut de juiste geslacht honden, daarom 2 als basis
@@ -145,33 +144,12 @@ class Databank:
                     # else:
                     #     self.give_all()
 
-    def give_id(self, naam):
-        df = self.__recommender_data
-        for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            if dog['name'] == naam:
-                return df.loc[row, 'dog_id']
-
-    def give_dog_name(self, id):
-        df = self.__recommender_data
-        for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            if dog['dog_id'] == id:
-                return df.loc[row, 'name']
-
     def give_all(self):
         for row, dog in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
             self.__recommender_data.loc[row, 'score']+= 1/len(self.__recommender_data) #we normalizeren tegenover het aantal honden in de lijst
 
-    def give_dog_data(self, naam):
-        df = self.__recommender_data
-        for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            if dog['name'] == naam:
-                return df.loc[row, :]
-
     def give_data(self):
         return self.__recommender_data
-
-    def give_score(self):
-        return self.__recommender_data['score']
 
     def search_dupl(self):
         for row1, dog1 in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
@@ -240,8 +218,6 @@ class Databank:
                         #print('-------')
                         lijst.append(dicti)
                         lijst
-
-
         return lijst
 
 
