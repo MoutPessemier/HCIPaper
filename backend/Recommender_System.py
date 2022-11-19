@@ -5,6 +5,7 @@
 # In order to update branch, checkout into branch (locally), pull into current merge from branch (remote)
 import pandas as pd
 import Dog as D
+from openpyxl import Workbook, load_workbook
 
 class Databank:
 
@@ -52,7 +53,7 @@ class Databank:
                 if vraagnum == 0: #Merk op dat de indices begint bij 0 en NIET 1
                     if dog['sex'] == input:  # V1: We willen absoluut de juiste geslacht honden, daarom 2 als basis
                         self.add_points(dog['dog_id'], 3 + ((gewicht - 60) / 50))
-                        if dog['name'] == "Rita":
+                        if dog['name'] == "r":
                             print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
                 # VRAAG 2: Welk grootte prefereert u?  (eigenschap: geslacht → reu, teef)
@@ -204,5 +205,56 @@ class Databank:
             #x = self.__recommender_data.loc[row, 'score']
             self.__recommender_data.loc[row, 'score'] = round(x, 3) #want 10 is de schaal waarmee we werken
 
-        return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
+        lijst = []
+        for row, data in self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4).iterrows():
+            dicti = {}
+            dicti["name"] = data['name']
+            dicti["imgURL"] = data['image']
+            dicti["description"] = data['description']
+            lijst.append(dicti)
+
+        return lijst
+        #return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
+
+    def export_data(self, lijst):
+        workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
+        ws = workbook.active  # je activeert e workbook
+        identificatie= id(1092) #elke run zal er een andere id gegeneert worden obv van dit getal
+        inzet = [identificatie] #meer leren of IDENT ID
+        for dicts in lijst:
+            for key, value in dicts.items():
+                inzet.append(value)
+
+        ws.append(inzet)
+        workbook.save(filename = 'recommendations.xlsx')
+        return identificatie
+
+    def read_data(self, id):
+        workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
+        ws = workbook.active  # je activeert e workbook
+        lijst=[]
+        for row in ws.iter_rows(min_row=2, max_col= 13):
+            if row[0].value == id: #Dus de rij met het specifieke ID maar de id moet niet terug meegegeven worden
+                for x in range(0,10):
+                    if x==0 or x==3 or x==6 or x==9:
+                        dicti={}
+                        dicti["name"] = row[1+x].value
+                        #print(dicti["name"])
+                        dicti["imgURL"] = row[2+x].value
+                        #print(dicti["imgURL"])
+                        dicti["description"] = row[3+x].value
+                        #print(dicti["description"])
+                        #print('-------')
+                        lijst.append(dicti)
+                        lijst
+
+
+        return lijst
+
+
+
+
+
+
+
 
