@@ -1,8 +1,4 @@
-#if you are commits behind master: checkout on branch, then pull into current merge from master origin (remote)
 
-
-#Tip: if you are commits behind master (as seen on Github): checkout on branch (locally), then pull into current merge from master origin (remote)
-# In order to update branch, checkout into branch (locally), pull into current merge from branch (remote)
 import pandas as pd
 from openpyxl import Workbook, load_workbook
 
