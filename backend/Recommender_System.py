@@ -187,7 +187,7 @@ class Databank:
         return lijst
         #return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
 
-    def export_data(self, lijst):
+    def export_excel(self, lijst):
         workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         identificatie= id(lijst) #elke run zal er een andere id gegeneert worden obv van dit getal
@@ -200,7 +200,7 @@ class Databank:
         workbook.save(filename = 'recommendations.xlsx')
         return identificatie
 
-    def read_data(self, id):
+    def read_excel(self, id):
         workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         lijst=[]
@@ -219,6 +219,10 @@ class Databank:
                         lijst.append(dicti)
                         lijst
         return lijst
+
+    def time(self, time1, time2):
+        #TODO
+        pass
 
 
 
