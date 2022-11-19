@@ -41,7 +41,7 @@ class RestAPI:
         return {"id":ident}
 
     def give_recommendation(self, id):
-        for values in id.values():
+        for values in id.values(): #assumption
             data = Sys.read_excel(values)
         return {"recommendations": data}
 
