@@ -145,7 +145,7 @@ class Databank:
                     #     self.give_all()
 
     def give_all(self):
-        for row, dog in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
+        for row, dog in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de row
             self.__recommender_data.loc[row, 'score']+= 1/len(self.__recommender_data) #we normalizeren tegenover het aantal honden in de lijst
 
     def give_data(self):
