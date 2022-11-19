@@ -43,9 +43,14 @@ class RestAPI:
         inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
         Sys.make_recommendation(inputdata) #puntentoekenning
         x = Sys.give_top4() #top 4 eruit halen
+        print('\n')
+        print('Dit is de recommendation dat zal worden opgeslagen')
+        print(x)
         ident = Sys.export_data(x) #schrijven het weg naar excel
-        print('This is the return id', ident)
-        return jsonify(ident, 200, {'Access-Control-Allow-Origin': '*'})
+        print('Dit is de bijhorende ticket voor de weggeschreven recommendations', ident)
+        print('Response: \n')
+
+        return {"id":ident}
 
     def give_recommendation(self, id):
         print('got here')
@@ -77,9 +82,9 @@ def recommender():
     #     print('Valuetype', type(value))
     #     print('\n')
 
-
-    #return {'id':1}
-    return REST.give_id(datajson)
+    #print(REST.give_id(datajson))
+    return {'id':1}
+    #return REST.give_id(datajson)
 
 @app.route('/get_recommendation/', methods=['GET'])
 def test():
