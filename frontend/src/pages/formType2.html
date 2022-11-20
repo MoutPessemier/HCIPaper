@@ -10,13 +10,14 @@
     <title>HondenMatcher | Bevraging Type 2</title>
   </head>
   <body>
+    <!-- TODO: put sliders below question instead of next to -->
     <div class="container">
       <h1>Vragenlijst</h1>
       <p>Vul de vragen in zodat wij een goeie match voor u kunnen aanbevelen!</p>
       <div class="mb-3 form-container">
         <div class="q-container" id="container">
           <!-- Q1 -->
-          <div class="importance-container sp-bw">
+          <div class="importance-container">
             <div>
               <p class="question">Welk <b>geslacht</b> prefereert u?</p>
               <div class="radio-container">
@@ -116,6 +117,14 @@
                 <label for="q44" class="form-check-label">Nee</label>
               </div>
             </div>
+            <div class="range-slider">
+              <label for="q4-slider" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+              <input type="range" class="form-range" id="q4-slider" min="0" max="100" />
+              <div class="w-280">
+                <p class="left">Weinig</p>
+                <p style="float: right">Veel</p>
+              </div>
+            </div>
           </div>
           <!-- Q5 -->
           <div class="importance-container sp-bw">
@@ -130,10 +139,20 @@
                 <label for="q52" class="form-check-label">Nee</label>
               </div>
             </div>
+            <div class="range-slider">
+              <label for="q5-slider" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+              <input type="range" class="form-range" id="q5-slider" min="0" max="100" />
+              <div class="w-280">
+                <p class="left">Weinig</p>
+                <p style="float: right">Veel</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <button class="btn btn-primary submit disabled" id="submit" aria-disabled="true">Krijg aanbevelingen</button>
+      <button class="btn btn-primary submit disabled right" id="submit" aria-disabled="true">
+        Krijg aanbevelingen
+      </button>
     </div>
     <footer>
       <div class="container">

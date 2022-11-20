@@ -7,6 +7,7 @@ const init = () => {
       aBtn.classList.remove('disabled');
       aBtn.onclick = () => {
         const formType = Math.floor(Math.random() * 3) + 1;
+        window.localStorage.setItem('formType', formType);
         const startTime = new Date().toString().split(' ')[4];
         window.localStorage.setItem('startTime', startTime);
         window.location.href = `/pages/formType${formType}.html`;

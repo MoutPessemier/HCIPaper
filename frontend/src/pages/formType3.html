@@ -10,6 +10,7 @@
     <title>HondenMatcher | Bevraging Type 3</title>
   </head>
   <body>
+    <!-- TODO: put sliders below question instead of next to -->
     <div class="container">
       <h1>Vragenlijst</h1>
       <p>Vul de vragen in zodat wij een goeie match voor u kunnen aanbevelen!</p>
@@ -116,6 +117,14 @@
                 <label for="q44" class="form-check-label">Nee</label>
               </div>
             </div>
+            <div class="range-slider">
+              <label for="q4-slider" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+              <input type="range" class="form-range" id="q4-slider" min="0" max="100" />
+              <div class="w-280">
+                <p class="left">Weinig</p>
+                <p style="float: right">Veel</p>
+              </div>
+            </div>
           </div>
           <!-- Q5 -->
           <div class="importance-container sp-bw">
@@ -128,6 +137,14 @@
               <div class="radio-container">
                 <input type="radio" class="form-check-input" id="q52" value="Nee" name="q5" />
                 <label for="q52" class="form-check-label">Nee</label>
+              </div>
+            </div>
+            <div class="range-slider">
+              <label for="q5-slider" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+              <input type="range" class="form-range" id="q5-slider" min="0" max="100" />
+              <div class="w-280">
+                <p class="left">Weinig</p>
+                <p style="float: right">Veel</p>
               </div>
             </div>
           </div>
@@ -154,6 +171,14 @@
                 <label for="q63" class="form-check-label">Minstens één kind onder 12 jaar</label>
               </div>
             </div>
+            <div class="range-slider">
+              <label for="q6-slider" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+              <input type="range" class="form-range" id="q6-slider" min="0" max="100" />
+              <div class="w-280">
+                <p class="left">Weinig</p>
+                <p style="float: right">Veel</p>
+              </div>
+            </div>
           </div>
           <!-- Q7 -->
           <div class="importance-container sp-bw">
@@ -166,6 +191,14 @@
               <div class="radio-container">
                 <input type="radio" class="form-check-input" id="q72" value="Nee" name="q7" />
                 <label for="q72" class="form-check-label">Nee</label>
+              </div>
+            </div>
+            <div class="range-slider">
+              <label for="q7-slider" class="form-label">Hoe belangrijk is deze vraag voor u?</label>
+              <input type="range" class="form-range" id="q7-slider" min="0" max="100" />
+              <div class="w-280">
+                <p class="left">Weinig</p>
+                <p style="float: right">Veel</p>
               </div>
             </div>
           </div>
@@ -255,7 +288,9 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary submit disabled" id="submit" aria-disabled="true">Krijg aanbevelingen</button>
+      <button class="btn btn-primary submit disabled right" id="submit" aria-disabled="true">
+        Krijg aanbevelingen
+      </button>
     </div>
     <footer>
       <div class="container">

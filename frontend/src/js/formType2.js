@@ -2,7 +2,6 @@ const getFormValueForQuestion = name => {
   const radios = document.getElementsByName(name);
   const radio = Array.from(radios).filter(radio => radio.checked)[0];
   const sliderValue = getSliderValueForQuestion(name) || 50;
-  console.log(sliderValue);
   return { value: radio.value, weight: sliderValue };
 };
 
@@ -42,7 +41,7 @@ const init = () => {
     const q4 = getFormValueForQuestion('q4');
     const q5 = getFormValueForQuestion('q5');
     const endTime = new Date().toString().split(' ')[4];
-    const startTime = localStorage.getItem('startTime');
+    const startTime = window.localStorage.getItem('startTime');
     const body = {
       startTime,
       endTime,
@@ -51,6 +50,7 @@ const init = () => {
       Q3: q3,
       Q4: q4,
       Q5: q5,
+      formType: window.localStorage.getItem('formType'),
     };
     const options = {
       method: 'POST',
@@ -59,15 +59,13 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    // TODO: test end point
-    fetch('', options)
-      .then(res => {
-        console.log(res);
-        //TODO: set reference id in localStorage
-        //document.localStorage.setAttribute('referenceId', res);
+    fetch('http://127.0.0.1:5001/get_id/', options)
+      .then(res => res.json())
+      .then(data => {
+        window.localStorage.setItem('referenceId', data.id);
         window.location.href = `/pages/suggestions.html`;
       })
-      .catch(res => console.log(res));
+      .catch(error => console.log('ERROR:: ', error));
   });
 };
 
