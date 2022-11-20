@@ -3,8 +3,10 @@ import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
-import datetime as dt
-
+#
+# http://localhost:1234/pages/formType1.html
+# http://localhost:1234/pages/formType2.html
+# http://localhost:1234/pages/formType3.html
 #TODO: Endpoint maken zodat de onderzoeksvragen kunnen worden opgeslaan
 #TODO: Timestamps verwerken naar excel
 
@@ -20,12 +22,23 @@ class RestAPI:
 
         antwoorden = []
         gewichten = []
-
+        startTime=0
+        endTime=0
+        formType=0
+        questions = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"]
         for key1, value in data.items():
-            if key1 == "startTime" or key1 == "endTime":
-                continue #later bijhouden
 
-            else:
+            if key1 == "startTime":
+                startTime = value
+
+            if key1 == "endTime":
+                endTime = value
+
+            if key1 == "formType":
+                formType = value
+
+            if key1 in questions:
+
                 for key2, content in value.items():
                     if key2 == 'value':
                         antwoorden.append(content)
@@ -33,12 +46,17 @@ class RestAPI:
                         gewichten.append(content)
 
         d = {'antwoorden': antwoorden, 'gewichten': gewichten}
+        #print(d)
         inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
         Sys.make_recommendation(inputdata) #puntentoekenning
         x = Sys.give_top4() #top 4 eruit halen
+        x.append({'startTime':startTime})
+        x.append({'endTime': endTime})
+        x.append({'formType': formType})
         ident = Sys.export_excel(x) #schrijven het weg naar excel
-
-        return {"id":ident}
+        data_json= json.dumps({"id":ident})
+        print('return',data_json)
+        return data_json
 
     def give_recommendation(self, id):
 
@@ -51,11 +69,10 @@ class RestAPI:
 @app.route('/get_id/', methods=['POST'])
 def recommender():
     REST = RestAPI()
-    data = request.data
-    datastr= data.decode("utf-8")
-    datajson= json.loads(datastr)
-
-    return REST.give_id(datajson)
+    data = request.get_json()
+    # print('Dit is de data \n')
+    print(data)
+    return REST.give_id(data)
 
 @app.route('/get_recommendation/', methods=['GET'])
 def test():

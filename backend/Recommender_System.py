@@ -1,6 +1,7 @@
 
 import pandas as pd
 from openpyxl import Workbook, load_workbook
+from datetime import datetime
 
 class Databank:
 
@@ -32,6 +33,7 @@ class Databank:
     def make_recommendation(self, inputdata):
         for vraagnum, data in inputdata.iterrows():
 
+
             input = data['antwoorden']
             gewicht = data['gewichten']
 
@@ -40,7 +42,7 @@ class Databank:
                 # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
                 if vraagnum == 0: #Merk op dat de indices begint bij 0 en NIET 1
                     if dog['sex'] == input:  # V1: We willen absoluut de juiste geslacht honden, daarom 2 als basis
-                        self.add_points(dog['dog_id'], 3 + ((gewicht - 60) / 50))
+                        self.add_points(dog['dog_id'], 3 + ((gewicht - 50) / 50))
                         if dog['name'] == "r":
                             print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
@@ -216,9 +218,6 @@ class Databank:
                         lijst
         return lijst
 
-    def time(self, time1, time2):
-        #TODO
-        pass
 
 
 
