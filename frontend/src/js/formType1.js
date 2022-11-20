@@ -33,7 +33,7 @@ const init = () => {
     const q4 = getFormValueForQuestion('q4');
     const q5 = getFormValueForQuestion('q5');
     const endTime = new Date().toString().split(' ')[4];
-    const startTime = localStorage.getItem('startTime');
+    const startTime = window.localStorage.getItem('startTime');
     const body = {
       startTime,
       endTime,
@@ -42,23 +42,20 @@ const init = () => {
       Q3: q3,
       Q4: q4,
       Q5: q5,
+      formType: window.localStorage.getItem('formType'),
     };
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(body),
     };
-    //TODO: test end point
     fetch('http://127.0.0.1:5001/get_id/', options)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        //TODO: set reference id in localStorage
-        //document.localStorage.setAttribute('referenceId', data.id);
-        //window.location.href = `/pages/suggestions.html`;
+        window.localStorage.setItem('referenceId', data.id);
+        window.location.href = `/pages/suggestions.html`;
       })
       .catch(error => console.log('ERROR:: ', error));
   });

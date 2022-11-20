@@ -46,7 +46,7 @@ const init = () => {
     const q9 = getFormValueForQuestion('q9');
     const q10 = getFormValueForQuestion('q10');
     const endTime = new Date().toString().split(' ')[4];
-    const startTime = localStorage.getItem('startTime');
+    const startTime = window.localStorage.getItem('startTime');
     const body = {
       startTime,
       endTime,
@@ -60,6 +60,7 @@ const init = () => {
       Q8: q8,
       Q9: q9,
       Q10: q10,
+      formType: window.localStorage.getItem('formType'),
     };
     const options = {
       method: 'POST',
@@ -68,15 +69,13 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    // TODO: test end point
-    fetch('', options)
-      .then(res => {
-        console.log(res);
-        //TODO: set reference id in localStorage
-        //document.localStorage.setAttribute('referenceId', res);
+    fetch('http://127.0.0.1:5001/get_id/', options)
+      .then(res => res.json())
+      .then(data => {
+        window.localStorage.setItem('referenceId', data.id);
         window.location.href = `/pages/suggestions.html`;
       })
-      .catch(res => console.log(res));
+      .catch(error => console.log('ERROR:: ', error));
   });
 };
 
