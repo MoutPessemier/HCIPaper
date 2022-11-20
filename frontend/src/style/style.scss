@@ -36,7 +36,6 @@ p {
   }
   &.question {
     font-size: 16px !important;
-    margin-right: 2em !important;
     margin-bottom: 0.5em !important;
   }
   &.bold {
@@ -77,9 +76,22 @@ div {
   &.center {
     margin: 0 auto;
   }
+  &.explanation {
+    display: flex;
+    flex-direction: row;
+    max-width: 700px;
+    justify-content: space-between;
+  }
+  &.doel {
+    margin-right: 25px;
+  }
+  &.onderzoek {
+    margin-left: 25px;
+  }
   &.form-container {
     display: flex !important;
     flex-direction: column !important;
+    margin: 0 auto;
   }
   &.cards-container {
     display: flex !important;
@@ -94,8 +106,13 @@ div {
   }
   &.importance-container {
     display: flex !important;
-    flex-direction: row !important;
-    margin-bottom: 2.5em;
+    flex-direction: column !important;
+    margin-bottom: 3.5em;
+  }
+  &.range-slider {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
   }
   &.sp-bw {
     justify-content: space-between !important;
@@ -125,6 +142,10 @@ button {
   }
   &.final {
     margin-top: 1.25em !important;
+  }
+  &.right {
+    float: right;
+    margin-right: 1em;
   }
 }
 

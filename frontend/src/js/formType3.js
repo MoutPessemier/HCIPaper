@@ -2,7 +2,6 @@ const getFormValueForQuestion = name => {
   const radios = document.getElementsByName(name);
   const radio = Array.from(radios).filter(radio => radio.checked)[0];
   const sliderValue = getSliderValueForQuestion(name) || 50;
-  console.log(sliderValue);
   return { value: radio.value, weight: sliderValue };
 };
 
@@ -24,7 +23,6 @@ const canSubmit = () => {
 };
 
 const init = () => {
-  // TODO: check if can submit
   const submitBtn = document.getElementById('submit');
   const container = document.getElementById('container');
   container.addEventListener('change', e => {

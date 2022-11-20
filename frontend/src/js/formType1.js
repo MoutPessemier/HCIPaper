@@ -15,7 +15,6 @@ const canSubmit = () => {
 };
 
 const init = () => {
-  // TODO: check if can submit
   const submitBtn = document.getElementById('submit');
   const container = document.getElementById('container');
   container.addEventListener('change', e => {
