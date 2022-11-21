@@ -7,8 +7,9 @@ import json
 # http://localhost:1234/pages/formType1.html
 # http://localhost:1234/pages/formType2.html
 # http://localhost:1234/pages/formType3.html
+
 #TODO: Endpoint maken zodat de onderzoeksvragen kunnen worden opgeslaan
-#TODO: Timestamps verwerken naar excel
+
 
 
 app = Flask(__name__)
@@ -26,6 +27,7 @@ class RestAPI:
         endTime=0
         formType=0
         questions = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"]
+
         for key1, value in data.items():
 
             if key1 == "startTime":
@@ -46,10 +48,8 @@ class RestAPI:
                         gewichten.append(content)
 
         d = {'antwoorden': antwoorden, 'gewichten': gewichten}
-        #print(d)
         inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
-        Sys.make_recommendation(inputdata) #puntentoekenning
-        x = Sys.give_top4() #top 4 eruit halen
+        x= Sys.make_recommendation(inputdata) #puntentoekenning
         x.append({'startTime':startTime})
         x.append({'endTime': endTime})
         x.append({'formType': formType})

@@ -1,7 +1,7 @@
 
 import pandas as pd
-from openpyxl import Workbook, load_workbook
-from datetime import datetime
+from openpyxl import load_workbook
+
 
 class Databank:
 
@@ -141,7 +141,7 @@ class Databank:
                             print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
                     # else:
                     #     self.give_all()
-
+        return self.give_top4()
     def give_all(self):
         for row, dog in self.__recommender_data.iterrows():  # .itterrows() geeft een rowindex en data weer in de row
             self.__recommender_data.loc[row, 'score']+= 1/len(self.__recommender_data) #we normalizeren tegenover het aantal honden in de lijst
@@ -186,7 +186,7 @@ class Databank:
         #return self.__recommender_data.sort_values(by=['score', 'name'], ascending=False).head(4)
 
     def export_excel(self, lijst):
-        workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
+        workbook = load_workbook('/Users/nam/PycharmProjects/HCIPaper/backend/records.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         identificatie= id(lijst) #elke run zal er een andere id gegeneert worden obv van dit getal
         inzet = [identificatie] #meer leren of IDENT ID
@@ -195,11 +195,14 @@ class Databank:
                 inzet.append(value)
 
         ws.append(inzet)
-        workbook.save(filename = 'recommendations.xlsx')
+        print('appended succesfully')
+        workbook.template = False
+        workbook.save('/Users/nam/PycharmProjects/HCIPaper/backend/records.xlsx')
+        print('saved')
         return identificatie
 
     def read_excel(self, id):
-        workbook = load_workbook('recommendations.xlsx')  # je laadt een workbook
+        workbook = load_workbook('records.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         lijst=[]
         for row in ws.iter_rows(min_row=2, max_col= 13):
@@ -217,7 +220,5 @@ class Databank:
                         lijst.append(dicti)
                         lijst
         return lijst
-
-
 
 
