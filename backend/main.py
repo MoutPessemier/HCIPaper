@@ -10,8 +10,6 @@ import json
 
 #TODO: Endpoint maken zodat de onderzoeksvragen kunnen worden opgeslaan
 
-
-
 app = Flask(__name__)
 CORS(app)
 Sys = R.Databank()
@@ -55,7 +53,6 @@ class RestAPI:
         x.append({'formType': formType})
         ident = Sys.export_excel(x) #schrijven het weg naar excel
         data_json= json.dumps({"id":ident})
-        print('return',data_json)
         return data_json
 
     def give_recommendation(self, id):
@@ -64,20 +61,16 @@ class RestAPI:
             data = Sys.read_excel(values)
         return {"recommendations": data}
 
-
-
 @app.route('/get_id/', methods=['POST'])
 def recommender():
     REST = RestAPI()
     data = request.get_json()
-    # print('Dit is de data \n')
     print(data)
     return REST.give_id(data)
 
 @app.route('/get_recommendation/', methods=['GET'])
 def test():
     REST = RestAPI()
-    print('test binnengegaan')
     id = json.loads(request.data.decode("utf-8"))
     print(id)
     return REST.give_recommendation(id)
