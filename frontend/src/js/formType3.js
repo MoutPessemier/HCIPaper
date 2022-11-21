@@ -8,7 +8,11 @@ const getFormValueForQuestion = name => {
 const getSliderValueForQuestion = name => {
   const slider = document.getElementById(`${name}-slider`);
   if (slider) {
-    return slider.value;
+    try {
+      return parseInt(slider.value);
+    } catch (error) {
+      console.log(`Error parsing slider value for question:: ${name}`);
+    }
   }
 };
 
