@@ -45,7 +45,7 @@ class RestAPI:
                     if key2 == 'value':
                         antwoorden.append(content)
                     if key2 == 'weight':
-                        gewichten.append(content)
+                        gewichten.append(int(content))
 
         d = {'antwoorden': antwoorden, 'gewichten': gewichten}
         inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
