@@ -104,7 +104,7 @@ def getRecommendations():
     return REST.give_recommendation(id)
 
 @app.route('/giveResearch', methods=['POST'])
-def getID():
+def Insert_question():
     REST = RestAPI()
     data = request.get_json()
     return REST.export_research_question(data)
