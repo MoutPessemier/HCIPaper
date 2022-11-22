@@ -53,7 +53,6 @@ class RestAPI:
         x.append({'formType': formType})
         ident = Sys.export_excel(x) #schrijven het weg naar excel
         data_json= json.dumps({"id":ident})
-        print('id returned')
         return data_json
 
     def give_recommendation(self, id):
@@ -72,12 +71,12 @@ class RestAPI:
             if key1 == "finalTime":
                 finalTime = value
             if key1 == "ID":
-                ID == value
-            if key1 == "V1":
+                ID = int(value)
+            if key1 == "Q1":
                 V1 = value
-            if key1 == "V2":
+            if key1 == "Q2":
                 V2 = value
-            if key1 == "V3":
+            if key1 == "Q3":
                 V3 = value
 
 
