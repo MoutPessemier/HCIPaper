@@ -31,6 +31,12 @@ img {
     right: 15em;
     top: 16em;
   }
+  &.dog-img {
+    min-width: 309px;
+    max-width: 309px;
+    min-height: 412px;
+    max-height: 412px;
+  }
 }
 
 h1 {
@@ -108,7 +114,6 @@ div {
   &.cards-container {
     display: flex !important;
     justify-content: space-between !important;
-    align-items: center !important;
   }
   &.q-container {
     margin-bottom: 1.5em !important;
@@ -142,6 +147,14 @@ div {
     justify-content: space-between;
     align-items: center;
   }
+  &.card {
+    flex-grow: 1;
+    margin-bottom: 3em;
+    max-width: 310px;
+  }
+  &.img-container {
+    min-height: 420px;
+  }
 }
 
 input[type='range'] {
@@ -154,6 +167,7 @@ button {
   }
   &.final {
     margin-top: 1.25em !important;
+    margin-bottom: 5em;
   }
   &.right {
     float: right;
@@ -216,4 +230,7 @@ span {
   border-bottom: 20px solid transparent;
   right: 32px;
   bottom: -24px;
+}
+.red {
+  color: red;
 }
