@@ -158,7 +158,7 @@ class Databank:
         return lijst
 
     def export_excel(self, lijst):
-        workbook = load_workbook('/Users/nam/PycharmProjects/HCIPaper/backend/records.xlsx')  # je laadt een workbook
+        workbook = load_workbook('./records.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         identificatie= id(lijst) #elke run zal er een andere id gegeneert worden obv van dit getal
         inzet = [identificatie] #meer leren of IDENT ID
@@ -168,11 +168,11 @@ class Databank:
 
         ws.append(inzet)
         workbook.template = False
-        workbook.save('/Users/nam/PycharmProjects/HCIPaper/backend/records.xlsx')
+        workbook.save('./records.xlsx')
         return identificatie
 
     def read_excel(self, id):
-        workbook = load_workbook('records.xlsx')  # je laadt een workbook
+        workbook = load_workbook('./records.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         lijst=[]
         for row in ws.iter_rows(min_row=2, max_col= 13):
