@@ -73,8 +73,6 @@ class Databank:
                 if vraagnum == 4:
                     if dog['petfriendly'] == input:  # V3: Gewicht beslissen mensen zelf
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
-                        if dog['name'] == "r":
-                            print('Een punt aan', dog['name'], 'voor vraag', vraagnum+1)
 
 #-------- Vanaf hier speciale logica vragen:
                 # Note to self: te harde codering!
@@ -142,8 +140,6 @@ class Databank:
 
         self.search_dupl() #om honden die samengezet moeten worden dezelfde punten gaan krijgen, assumptie: enkel duplicates in data indien ze samen horen
         for row, data in self.__recommender_data.iterrows():
-            #print(max_value)
-            #x = 10 * (self.__recommender_data.loc[row, 'score'] / max_value) #als we een schaal op 10 willen is deze normalizatie noodzakelijk omdat de gewichten zorgen voor onbalans
             x = self.__recommender_data.loc[row, 'score']
             self.__recommender_data.loc[row, 'score'] = round(x, 3) #want 10 is de schaal waarmee we werken
 
@@ -208,4 +204,3 @@ class Databank:
                         ws[cell_name].value = lijst[3]  # the value of the specific cell
 
         workbook.save('./records.xlsx')
-
