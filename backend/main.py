@@ -1,6 +1,6 @@
 import Recommender_System as R
 import pandas as pd
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from flask_cors import CORS
 import json
 #
@@ -53,28 +53,63 @@ class RestAPI:
         x.append({'formType': formType})
         ident = Sys.export_excel(x) #schrijven het weg naar excel
         data_json= json.dumps({"id":ident})
+        print('id returned')
         return data_json
 
     def give_recommendation(self, id):
         dogs = Sys.read_excel(int(id))
         return {"recommendations": dogs}
 
-@app.route('/get_id/', methods=['POST'])
-def recommender():
+    def export_research_question(self, data):
+        ID = 0
+        V1 = 0
+        V2 = 0
+        V3 = 0
+        finalTime = 0
+        entry = []
+        for key1, value in data.items():
+
+            if key1 == "finalTime":
+                finalTime = value
+            if key1 == "ID":
+                ID == value
+            if key1 == "V1":
+                V1 = value
+            if key1 == "V2":
+                V2 = value
+            if key1 == "V3":
+                V3 = value
+
+
+        entry.append(V1)
+        entry.append(V2)
+        entry.append(V3)
+        entry.append(finalTime)
+        Sys.find_and_export(ID, entry)
+
+        return {"Message:": "Entry Saved"}
+
+
+@app.route('/getId', methods=['POST'])
+def getID():
     REST = RestAPI()
     data = request.get_json()
-    print(data)
     return REST.give_id(data)
 
-@app.route('/get_recommendation', methods=['GET'])
+@app.route('/getRecommendation', methods=['GET'])
 def getRecommendations():
     REST = RestAPI()
     args = request.args
     id = args.get('id')
-    print(id)
     return REST.give_recommendation(id)
 
-@app.route('/wakeUp/')
+@app.route('/giveResearch', methods=['POST'])
+def getID():
+    REST = RestAPI()
+    data = request.get_json()
+    return REST.export_research_question(data)
+
+@app.route('/wakeUp')
 def wakeup():
     return {'status': 'OK'}
 
