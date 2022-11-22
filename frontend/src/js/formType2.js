@@ -11,7 +11,7 @@ const getSliderValueForQuestion = name => {
     try {
       return parseInt(slider.value);
     } catch (error) {
-      console.log(`Error parsing slider value for question:: ${name}`);
+      console.log(`Error parsing slider value for question ${name}:: ${error}`);
     }
   }
 };
@@ -63,7 +63,7 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    fetch('http://127.0.0.1:5001/get_id/', options)
+    fetch('http://127.0.0.1:5001/getId', options)
       .then(res => res.json())
       .then(data => {
         window.localStorage.setItem('referenceId', data.id);

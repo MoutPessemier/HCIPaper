@@ -34,42 +34,60 @@ const generateCards = (container, dog) => {
   container.appendChild(card);
 };
 
+const getSliderValueForQuestion = name => {
+  const slider = document.getElementById(`satQ${name}`);
+  if (slider) {
+    try {
+      return parseInt(slider.value);
+    } catch (error) {
+      console.log(`Error parsing slider value for question ${name}:: ${error}`);
+    }
+  }
+};
+
 const init = () => {
   const cardsContainer = document.getElementById('cards-container');
   fetch(
-    'http://127.0.0.1:5001/get_recommendation?' +
+    'http://127.0.0.1:5001/getRecommendation?' +
       new URLSearchParams({
         id: window.localStorage.getItem('referenceId'),
       })
   )
     .then(res => res.json())
     .then(data => {
-      console.log(data.recommendations);
       data.recommendations.forEach(dog => {
         generateCards(cardsContainer, dog);
       });
     })
     .catch(err => console.log(err));
 
+  const backBtn = document.getElementById('back');
+  backBtn.addEventListener('click', e => {
+    const formType = window.localStorage.getItem('formType');
+    window.location.href = `/pages/formType${formType}.html`;
+  });
+
   const submitBtn = document.getElementById('submit');
   submitBtn.addEventListener('click', e => {
+    const finalTime = new Date().toString().split(' ')[4];
+    const body = {
+      finalTime,
+      ID: window.localStorage.getItem('referenceId'),
+      Q1: getSliderValueForQuestion(1),
+      Q2: getSliderValueForQuestion(2),
+      Q3: getSliderValueForQuestion(3),
+    };
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      //TODO: get values
-      //body: JSON.stringify(),
+      body: JSON.stringify(body),
     };
-    fetch('', options)
-      .then(data => {
-        if (!data) {
-          throw Error(data.status);
-        }
-        return data.json();
-      })
-      //TODO: update
-      .then(update => {});
+    fetch('http://127.0.0.1:5001/giveResearch', options)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   });
 };
 
