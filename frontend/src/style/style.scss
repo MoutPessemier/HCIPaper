@@ -122,9 +122,12 @@ div {
     margin-bottom: 0.25em !important;
   }
   &.importance-container {
-    display: flex !important;
-    flex-direction: column !important;
-    margin-bottom: 3.5em;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    margin-bottom: 3em;
+    width: 420px;
+    padding: 0.5em;
   }
   &.range-slider {
     display: flex;
@@ -154,6 +157,12 @@ div {
   }
   &.img-container {
     min-height: 420px;
+  }
+  &.satisfaction-question-container {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }
 
@@ -231,6 +240,7 @@ span {
   right: 32px;
   bottom: -24px;
 }
-.red {
-  color: red;
+
+#back {
+  display: inline-block !important;
 }

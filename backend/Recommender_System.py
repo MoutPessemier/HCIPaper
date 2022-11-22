@@ -187,3 +187,25 @@ class Databank:
                         lijst
         return lijst
 
+    def find_and_export(self, id, lijst):
+        workbook = load_workbook('./records.xlsx')  # je laadt een workbook
+        ws = workbook.active  # je activeert e workbook
+        for index in ws.iter_rows(min_row=2):
+            if index[0].value == id: #Dus de rij met het specifieke ID maar de id moet niet terug meegegeven worden
+
+                for column in "QRST":  # Here you can add or reduce the columns
+                    if column == "Q":
+                        cell_name = "{}{}".format(column, index[0].row)
+                        ws[cell_name].value  = lijst[0]# the value of the specific cell
+                    if column == "R":
+                        cell_name = "{}{}".format(column, index[0].row)
+                        ws[cell_name].value = lijst[1]  # the value of the specific cell
+                    if column == "S":
+                        cell_name = "{}{}".format(column, index[0].row)
+                        ws[cell_name].value = lijst[2]  # the value of the specific cell
+                    if column == "T":
+                        cell_name = "{}{}".format(column, index[0].row)
+                        ws[cell_name].value = lijst[3]  # the value of the specific cell
+
+        workbook.save('./records.xlsx')
+
