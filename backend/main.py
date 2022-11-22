@@ -56,10 +56,8 @@ class RestAPI:
         return data_json
 
     def give_recommendation(self, id):
-
-        for values in id.values(): #assumption
-            data = Sys.read_excel(values)
-        return {"recommendations": data}
+        dogs = Sys.read_excel(int(id))
+        return {"recommendations": dogs}
 
 @app.route('/get_id/', methods=['POST'])
 def recommender():
@@ -68,10 +66,11 @@ def recommender():
     print(data)
     return REST.give_id(data)
 
-@app.route('/get_recommendation/', methods=['GET'])
+@app.route('/get_recommendation', methods=['GET'])
 def getRecommendations():
     REST = RestAPI()
-    id = json.loads(request.data.decode("utf-8"))
+    args = request.args
+    id = args.get('id')
     print(id)
     return REST.give_recommendation(id)
 
