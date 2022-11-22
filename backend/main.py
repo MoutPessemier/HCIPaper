@@ -69,11 +69,15 @@ def recommender():
     return REST.give_id(data)
 
 @app.route('/get_recommendation/', methods=['GET'])
-def test():
+def getRecommendations():
     REST = RestAPI()
     id = json.loads(request.data.decode("utf-8"))
     print(id)
     return REST.give_recommendation(id)
+
+@app.route('/wakeUp/')
+def wakeup():
+    return {'status': 'OK'}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001", debug=True)
