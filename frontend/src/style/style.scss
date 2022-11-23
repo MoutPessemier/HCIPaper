@@ -1,9 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap');
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .container {
@@ -55,7 +57,7 @@ p {
     margin-bottom: 0.5em !important;
   }
   &.bold {
-    font-weight: bold;
+    font-weight: 600;
   }
   &.left {
     float: left;
@@ -71,6 +73,16 @@ p {
     text-align: center;
     position: relative;
     bottom: -15px;
+  }
+  &.emp {
+    color: #ff6961;
+    font-weight: 700;
+  }
+}
+
+label {
+  &.bold {
+    font-weight: 500;
   }
 }
 
@@ -182,6 +194,9 @@ button {
     float: right;
     margin-right: 1em;
   }
+  &.btnm {
+    width: 100%;
+  }
 }
 
 .float-left {
@@ -212,6 +227,13 @@ span {
   }
 }
 
+@media screen and (max-wdith: 992px) {
+  .bubble,
+  .bubble-pic {
+    display: none;
+  }
+}
+
 .bubble {
   position: absolute;
   right: 15em;
@@ -219,7 +241,7 @@ span {
   font-size: 18px;
   line-height: 24px;
   width: 300px;
-  background: #eee;
+  background: #f6ecf5;
   border-radius: 40px;
   padding: 24px;
   text-align: center;
@@ -233,9 +255,9 @@ span {
   width: 0px;
   height: 0px;
   position: absolute;
-  border-right: 24px solid #eee;
+  border-right: 24px solid #f6ecf5;
   border-left: 12px solid transparent;
-  border-top: 12px solid #eee;
+  border-top: 12px solid #f6ecf5;
   border-bottom: 20px solid transparent;
   right: 32px;
   bottom: -24px;
