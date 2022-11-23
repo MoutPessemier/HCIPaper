@@ -35,7 +35,7 @@ const generateCards = (container, dog) => {
   modalBtn.setAttribute('type', 'button');
   modalBtn.setAttribute('data-bs-toggle', 'modal');
   modalBtn.setAttribute('data-bs-target', `#dogModal${dog.name}`);
-  modalBtn.innerHTML = `Bekijk ${dog.name}`;
+  modalBtn.innerHTML = `Meer info over ${dog.name}`;
 
   const modal = new bootstrap.Modal(document.getElementById(`dogModal${dog.name}`), { focus: true, keyboard: true });
   modalBtn.addEventListener('click', e => {
