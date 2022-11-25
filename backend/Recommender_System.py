@@ -6,23 +6,19 @@ from openpyxl import load_workbook
 class Databank:
 
     def __init__(self):
-        self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','score'])  # dataframe maken; handig voor doorzoeken
+        self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','summary','score'])  # dataframe maken; handig voor doorzoeken
 
     def create_dog(self):
 
         df = pd.read_excel("Dogs" + '.xlsx')  # data inlezen
         for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            self.append_dog_data(row, dog['Naam'], dog['Geslacht'], dog['Groot'], dog['Leeftijd'], #We populeren het systeem met de honden
-                                   dog['Andere_hond'],
-                                   dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'],
-                                   dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'])
+            self.append_dog_data(row, dog['Naam'], dog['Geslacht'], dog['Groot'], dog['Leeftijd'], dog['Andere_hond'], dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'], dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'], dog['Summary'])
 
-    def append_dog_data(self, id, name, sex, size, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, score= 0):
-
+    def append_dog_data(self, id, name, sex, size, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, summary, score= 0):
 
         new_row = pd.Series({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
              'age': age, 'dogfriendly': dogfriendly, 'petfriendly': petfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
-             'hug': hug,'training': training,'BCD': BCD,'score': score,'description': Description, 'image': image})
+             'hug': hug,'training': training,'BCD': BCD,'score': score,'description': Description, 'image': image, 'summary': summary})
         self.__recommender_data = pd.concat([self.__recommender_data, new_row.to_frame().T], ignore_index=True) #aangezien een pd.series 1 kolom geeft met de vragen als rij moeten we transponern met .T
 
     def add_points(self, id, score):
@@ -149,8 +145,8 @@ class Databank:
             dicti["name"] = data['name']
             dicti["imgURL"] = data['image']
             dicti["description"] = data['description']
+            dicti["summary"] = data['summary']
             lijst.append(dicti)
-
         return lijst
 
     def export_excel(self, lijst):
@@ -171,14 +167,16 @@ class Databank:
         workbook = load_workbook('./records.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         lijst=[]
-        for row in ws.iter_rows(min_row=2, max_col= 13):
+        for row in ws.iter_rows(min_row=2, max_col= 17):
             if row[0].value == id: #Dus de rij met het specifieke ID maar de id moet niet terug meegegeven worden
-                for x in range(0,10):
-                    if x==0 or x==3 or x==6 or x==9:
+                for x in range(0,13):
+                    if x==0 or x==4 or x==8 or x==12:
+
                         dicti={}
                         dicti["name"] = row[1+x].value
                         dicti["imgURL"] = row[2+x].value
                         dicti["description"] = row[3+x].value
+                        dicti["summary"] = row[4+x].value
                         lijst.append(dicti)
                         lijst
         return lijst
@@ -189,17 +187,17 @@ class Databank:
         for index in ws.iter_rows(min_row=2):
             if index[0].value == id: #Dus de rij met het specifieke ID maar de id moet niet terug meegegeven worden
 
-                for column in "QRST":  # Here you can add or reduce the columns
-                    if column == "Q":
+                for column in "UVWX":  # Here you can add or reduce the columns
+                    if column == "U":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value  = lijst[0]# the value of the specific cell
-                    if column == "R":
+                    if column == "V":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[1]  # the value of the specific cell
-                    if column == "S":
+                    if column == "W":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[2]  # the value of the specific cell
-                    if column == "T":
+                    if column == "X":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[3]  # the value of the specific cell
 
