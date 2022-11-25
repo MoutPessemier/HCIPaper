@@ -6,4 +6,4 @@ services:
       context: ../
       dockerfile: deployments/app/Dockerfile
     ports:
-      - "3490:3490"
+      - "3490:5000"
