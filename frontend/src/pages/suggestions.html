@@ -12,99 +12,112 @@
   <body>
     <div class="container">
       <h1>Aanbevelingen</h1>
-      <div id="cards-container" class="cards-container"></div>
-      <div class="satisfaction-container">
-        <p class="question bold">Vul deze vraagjes in en u bent klaar met het onderzoek!</p>
-        <div class="satisfaction-question-container">
-          <div class="importance-container sp-bw">
-            <label for="satQ1" class="form-label"
-              >Hoe bereid bent u om contact op te nemen met het asiel voor één van deze honden?</label
-            >
-            <div style="width: 280px">
-              <input style="width: 100%" id="satQ1" class="form-range" type="range" min="0" max="7" />
-              <div style="width: 100%; display: inline-block; padding-left: 8px">
-                <div style="width: 13%" class="float-left">|</div>
-                <div style="width: 14%" class="float-left">|</div>
-                <div style="width: 14%" class="float-left">|</div>
-                <div style="width: 13%" class="float-left">|</div>
-                <div style="width: 14%" class="float-left">|</div>
-                <div style="width: 15%" class="float-left">|</div>
-                <div style="width: 13%" class="float-left">|</div>
-                <div class="float-left">|</div>
-              </div>
-              <div style="width: 100%; display: inline-block; padding-left: 5px">
-                <div style="width: 13%" class="float-left">0</div>
-                <div style="width: 14%" class="float-left">1</div>
-                <div style="width: 14%" class="float-left">2</div>
-                <div style="width: 13%" class="float-left">3</div>
-                <div style="width: 14%" class="float-left">4</div>
-                <div style="width: 15%" class="float-left">5</div>
-                <div style="width: 13%" class="float-left">6</div>
-                <div class="float-left">7</div>
-              </div>
+      <div id="cards-container" class="cards-container row"></div>
+      <div id="modal-container"></div>
+    </div>
+    <div class="satisfaction-container">
+      <p class="question bold">Vul deze vraagjes in en u bent klaar met het onderzoek!</p>
+      <div class="satisfaction-question-container row">
+        <div class="importance-container sp-bw importance-container-center">
+          <label for="satQ1" class="form-label bold"
+            >Hoe bereid bent u om contact op te nemen met het asiel voor één van deze honden?</label
+          >
+          <div style="width: 280px">
+            <input style="width: 100%" id="satQ1" class="form-range" type="range" min="0" max="7" />
+            <div style="width: 100%; display: inline-block; padding-left: 8px">
+              <div style="width: 13%" class="float-left">|</div>
+              <div style="width: 14%" class="float-left">|</div>
+              <div style="width: 14%" class="float-left">|</div>
+              <div style="width: 13%" class="float-left">|</div>
+              <div style="width: 14%" class="float-left">|</div>
+              <div style="width: 15%" class="float-left">|</div>
+              <div style="width: 13%" class="float-left">|</div>
+              <div class="float-left">|</div>
+            </div>
+            <div style="width: 100%; display: inline-block; padding-left: 5px">
+              <div style="width: 13%" class="float-left">0</div>
+              <div style="width: 14%" class="float-left">1</div>
+              <div style="width: 14%" class="float-left">2</div>
+              <div style="width: 13%" class="float-left">3</div>
+              <div style="width: 14%" class="float-left">4</div>
+              <div style="width: 15%" class="float-left">5</div>
+              <div style="width: 13%" class="float-left">6</div>
+              <div class="float-left">7</div>
             </div>
           </div>
-          <div class="importance-container sp-bw">
-            <label for="satQ2" class="form-label">Hoe goed sluiten deze honden aan bij uw verwachtingen?</label>
-            <div style="width: 280px">
-              <input style="width: 100%" id="satQ2" class="form-range" type="range" min="0" max="7" />
-              <div style="width: 100%; display: inline-block; padding-left: 8px">
-                <div style="width: 13%; float: left">|</div>
-                <div style="width: 14%; float: left">|</div>
-                <div style="width: 14%; float: left">|</div>
-                <div style="width: 13%; float: left">|</div>
-                <div style="width: 14%; float: left">|</div>
-                <div style="width: 15%; float: left">|</div>
-                <div style="width: 13%; float: left">|</div>
-                <div style="float: left">|</div>
-              </div>
-              <div style="width: 100%; display: inline-block; padding-left: 5px">
-                <div style="width: 13%; float: left">0</div>
-                <div style="width: 14%; float: left">1</div>
-                <div style="width: 14%; float: left">2</div>
-                <div style="width: 13%; float: left">3</div>
-                <div style="width: 14%; float: left">4</div>
-                <div style="width: 15%; float: left">5</div>
-                <div style="width: 13%; float: left">6</div>
-                <div style="float: left">7</div>
-              </div>
+        </div>
+        <div class="importance-container sp-bw importance-container-center">
+          <label for="satQ2" class="form-label bold">Hoe goed sluiten deze honden aan bij uw verwachtingen?</label>
+          <div style="width: 280px">
+            <input style="width: 100%" id="satQ2" class="form-range" type="range" min="0" max="7" />
+            <div style="width: 100%; display: inline-block; padding-left: 8px">
+              <div style="width: 13%; float: left">|</div>
+              <div style="width: 14%; float: left">|</div>
+              <div style="width: 14%; float: left">|</div>
+              <div style="width: 13%; float: left">|</div>
+              <div style="width: 14%; float: left">|</div>
+              <div style="width: 15%; float: left">|</div>
+              <div style="width: 13%; float: left">|</div>
+              <div style="float: left">|</div>
+            </div>
+            <div style="width: 100%; display: inline-block; padding-left: 5px">
+              <div style="width: 13%; float: left">0</div>
+              <div style="width: 14%; float: left">1</div>
+              <div style="width: 14%; float: left">2</div>
+              <div style="width: 13%; float: left">3</div>
+              <div style="width: 14%; float: left">4</div>
+              <div style="width: 15%; float: left">5</div>
+              <div style="width: 13%; float: left">6</div>
+              <div style="float: left">7</div>
             </div>
           </div>
-          <div class="importance-container sp-bw">
-            <label for="satQ3" class="form-label">Hoe makkelijk/moeilijk vond u het om dit proces te doorlopen?</label>
-            <div style="width: 280px">
-              <input style="width: 100%" id="satQ3" class="form-range" type="range" min="0" max="7" />
-              <div style="width: 100%; display: inline-block; padding-left: 8px">
-                <div style="width: 13%" class="float-left">|</div>
-                <div style="width: 14%" class="float-left">|</div>
-                <div style="width: 14%" class="float-left">|</div>
-                <div style="width: 13%" class="float-left">|</div>
-                <div style="width: 14%" class="float-left">|</div>
-                <div style="width: 15%" class="float-left">|</div>
-                <div style="width: 13%" class="float-left">|</div>
-                <div class="float-left">|</div>
-              </div>
-              <div style="width: 100%; display: inline-block; padding-left: 5px">
-                <div style="width: 13%" class="float-left">0</div>
-                <div style="width: 14%" class="float-left">1</div>
-                <div style="width: 14%" class="float-left">2</div>
-                <div style="width: 13%" class="float-left">3</div>
-                <div style="width: 14%" class="float-left">4</div>
-                <div style="width: 15%" class="float-left">5</div>
-                <div style="width: 13%" class="float-left">6</div>
-                <div class="float-left">7</div>
-              </div>
+        </div>
+        <div class="importance-container sp-bw importance-container-center">
+          <label for="satQ3" class="form-label bold">Hoe moeilijk vond u het om dit proces te doorlopen?</label>
+          <div style="width: 280px">
+            <input style="width: 100%" id="satQ3" class="form-range" type="range" min="0" max="7" />
+            <div style="width: 100%; display: inline-block; padding-left: 8px">
+              <div style="width: 13%" class="float-left">|</div>
+              <div style="width: 14%" class="float-left">|</div>
+              <div style="width: 14%" class="float-left">|</div>
+              <div style="width: 13%" class="float-left">|</div>
+              <div style="width: 14%" class="float-left">|</div>
+              <div style="width: 15%" class="float-left">|</div>
+              <div style="width: 13%" class="float-left">|</div>
+              <div class="float-left">|</div>
+            </div>
+            <div style="width: 100%; display: inline-block; padding-left: 5px">
+              <div style="width: 13%" class="float-left">0</div>
+              <div style="width: 14%" class="float-left">1</div>
+              <div style="width: 14%" class="float-left">2</div>
+              <div style="width: 13%" class="float-left">3</div>
+              <div style="width: 14%" class="float-left">4</div>
+              <div style="width: 15%" class="float-left">5</div>
+              <div style="width: 13%" class="float-left">6</div>
+              <div class="float-left">7</div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <a id="back" class="btn btn-secondary">Ga terug</a>
-        <button id="submit" type="submit" class="btn btn-primary center final right">Verstuur antwoorden</button>
-      </div>
+    </div>
+
+    <div class="btn-container">
+      <p id="thanks" class="emp hidden">Bedankt om de vragen te beantwoorden!</p>
+      <a id="back" class="btn btn-primary back hidden">Pas uw voorkeuren aan</a>
+      <button id="submit" type="submit" class="btn btn-primary center final">Verstuur antwoorden</button>
     </div>
     <footer>
       <div class="container">
+        <div>
+          <span class="bold">Opgelet</span>: Deze matchingtool geeft slechts een ruwe indicatie van een mogelijke match
+          en is niet bindend. Ze maakt deel uit van een onderzoek van de KU Leuven, faculteit Economie en
+          Bedrijfswetenschappen en bevindt zich nog in de onderzoeksfase. Eventuele matches en adopties verlopen
+          uitsluitend via dierenasiel Genk. Interesse in een van deze honden? Neem contact op via
+          info@dierenasielgenk.be om te zien of jullie echt bij elkaar passen!
+          <br />
+          Voor een volledig overzicht van de beschikbare honden kan u terecht op
+          <a href="https://dierenasielgenk.be/honden" target="_blank">https://dierenasielgenk.be/honden/</a>.
+        </div>
         <div class="footer-row">
           <p>
             Voor vragen, stuur een mailtje naar

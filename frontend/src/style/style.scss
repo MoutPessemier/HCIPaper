@@ -1,9 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap');
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .container {
@@ -53,9 +55,10 @@ p {
   &.question {
     font-size: 16px !important;
     margin-bottom: 0.5em !important;
+    margin-top: 2em !important;
   }
   &.bold {
-    font-weight: bold;
+    font-weight: 600;
   }
   &.left {
     float: left;
@@ -66,11 +69,25 @@ p {
   &.consent {
     max-width: 40em;
     margin: 0 auto;
+    text-align: left !important;
   }
   &.center {
     text-align: center;
     position: relative;
     bottom: -15px;
+  }
+  &.hidden {
+    display: none;
+  }
+  &.emp {
+    font-weight: 600;
+    color: #0d6efd;
+  }
+}
+
+label {
+  &.bold {
+    font-weight: 500;
   }
 }
 
@@ -82,6 +99,17 @@ a {
   }
   &.hidden {
     display: none !important;
+  }
+  &.inline {
+    display: inline !important;
+  }
+  &.back {
+    margin-top: 1.25em !important;
+    margin-bottom: 5em;
+    min-width: 7em;
+  }
+  &.visible {
+    display: inline-block !important;
   }
 }
 
@@ -109,14 +137,11 @@ div {
   &.form-container {
     display: flex !important;
     flex-direction: column !important;
-    margin: 0 auto;
+    margin-bottom: 1.5em !important;
   }
   &.cards-container {
     display: flex !important;
-    justify-content: space-between !important;
-  }
-  &.q-container {
-    margin-bottom: 1.5em !important;
+    justify-content: space-around !important;
   }
   &.radio-container {
     margin-bottom: 0.25em !important;
@@ -124,7 +149,6 @@ div {
   &.importance-container {
     display: flex;
     flex-direction: column;
-    // align-items: center;
     margin-bottom: 3em;
     width: 420px;
     padding: 0.5em;
@@ -145,6 +169,7 @@ div {
     flex-direction: column;
   }
   &.footer-row {
+    margin-top: 2em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -154,6 +179,7 @@ div {
     flex-grow: 1;
     margin-bottom: 3em;
     max-width: 310px;
+    padding: 0;
   }
   &.img-container {
     min-height: 420px;
@@ -163,6 +189,24 @@ div {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    --bs-gutter-x: 0 !important;
+  }
+  &.flex {
+    display: flex;
+    align-items: center;
+  }
+  &.satisfaction-container {
+    background-color: #d08e1220;
+    padding: 0 10em;
+  }
+  &.btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    background-color: #d08e1220;
+    padding: 0 10em;
   }
 }
 
@@ -177,10 +221,17 @@ button {
   &.final {
     margin-top: 1.25em !important;
     margin-bottom: 5em;
+    min-width: 7em;
   }
   &.right {
     float: right;
     margin-right: 1em;
+  }
+  &.btnm {
+    width: 100%;
+  }
+  &.hidden {
+    display: none !important;
   }
 }
 
@@ -195,52 +246,40 @@ footer {
   padding: 2em;
   a {
     display: inline !important;
-    color: #698470;
+    color: #78aee4;
     &:visited {
-      color: #698470;
+      color: #78aee4;
     }
     &:hover {
-      color: #698470;
+      color: #78aee4;
     }
   }
 }
 
 span {
   &.emp {
-    color: red;
+    color: #78aee4;
+    font-weight: bold;
+  }
+  &.bold {
     font-weight: bold;
   }
 }
 
-.bubble {
-  position: absolute;
-  right: 15em;
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: 24px;
-  width: 300px;
-  background: #eee;
-  border-radius: 40px;
-  padding: 24px;
-  text-align: center;
-  color: #000;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 2;
+#consent {
+  margin-right: 0.25em;
 }
 
-.bubble-bottom-left:before {
-  content: '';
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  border-right: 24px solid #eee;
-  border-left: 12px solid transparent;
-  border-top: 12px solid #eee;
-  border-bottom: 20px solid transparent;
-  right: 32px;
-  bottom: -24px;
-}
-
-#back {
-  display: inline-block !important;
+@media only screen and (max-width: 600px) {
+  div {
+    &.satisfaction-container {
+      padding: 1em;
+    }
+    &.importance-container-center {
+      align-items: center;
+    }
+    &.btn-container {
+      padding: 0 0.25em;
+    }
+  }
 }

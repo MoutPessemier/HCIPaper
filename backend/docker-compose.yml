@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  app:
+    image: "hondenmatcher_rest_api_image"
+    container_name: hondenmatcher_rest_api_container
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./app/records.xlsx:/app/records.xlsx
+    ports:
+      - "3490:5000"
+    restart: always
