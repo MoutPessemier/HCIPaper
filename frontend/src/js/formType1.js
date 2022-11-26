@@ -51,7 +51,7 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    fetch('http://127.0.0.1:5001/getId', options)
+    fetch('http://127.0.0.1:5000/getId', options)
       .then(res => res.json())
       .then(data => {
         window.localStorage.setItem('referenceId', data.id);

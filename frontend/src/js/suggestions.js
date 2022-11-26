@@ -120,7 +120,7 @@ const init = () => {
   const cardsContainer = document.getElementById('cards-container');
   const modalContainer = document.getElementById('modal-container');
   fetch(
-    'http://127.0.0.1:5001/getRecommendation?' +
+    'http://127.0.0.1:5000/getRecommendation?' +
       new URLSearchParams({
         id: window.localStorage.getItem('referenceId'),
       })
@@ -136,10 +136,11 @@ const init = () => {
 
   const backBtn = document.getElementById('back');
   backBtn.addEventListener('click', e => {
+    window.localStorage.setItem('startTime', new Date().toString().split(' ')[4]);
     const formType = window.localStorage.getItem('formType');
     window.location.href = `/pages/formType${formType}.html`;
   });
-
+  const thanksP = document.getElementById('thanks');
   const submitBtn = document.getElementById('submit');
   submitBtn.addEventListener('click', e => {
     const finalTime = new Date().toString().split(' ')[4];
@@ -157,9 +158,14 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    fetch('http://127.0.0.1:5001/giveResearch', options)
+    fetch('http://127.0.0.1:5000/giveResearch', options)
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        submitBtn.classList.add('hidden');
+        backBtn.classList.remove('hidden');
+        thanksP.classList.remove('hidden');
+      })
       .catch(err => console.log(err));
   });
 };

@@ -1,9 +1,0 @@
-version: "2"
-services:
-  app:
-    container_name: hondenzoekerbackend
-    build:
-      context: ../
-      dockerfile: deployments/app/Dockerfile
-    ports:
-      - "3490:5000"
