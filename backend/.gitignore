@@ -1,2 +1,5 @@
 # Virtual Environment
 venv/
+
+# Mac OS generated files
+.DS_Store
