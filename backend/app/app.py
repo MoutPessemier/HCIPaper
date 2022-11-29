@@ -88,7 +88,6 @@ class RestAPI:
 
         return {"Message:": "Entry Saved"}
 
-
 @app.route('/getId', methods=['POST'])
 def getID():
     REST = RestAPI()

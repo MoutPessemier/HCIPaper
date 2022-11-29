@@ -6,19 +6,20 @@ from openpyxl import load_workbook
 class Databank:
 
     def __init__(self):
-        self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','summary','score'])  # dataframe maken; handig voor doorzoeken
+        self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','summary','link','label','score'])  # dataframe maken; handig voor doorzoeken
+        self.__filterdata = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','summary','link','score'])
 
     def create_dog(self):
 
         df = pd.read_excel("Dogs" + '.xlsx')  # data inlezen
         for row, dog in df.iterrows():  # .itterrows() geeft een rowindex en data weer in de rij
-            self.append_dog_data(row, dog['Naam'], dog['Geslacht'], dog['Groot'], dog['Leeftijd'], dog['Andere_hond'], dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'], dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'], dog['Summary'])
+            self.append_dog_data(row, dog['Naam'], dog['Geslacht'], dog['Groot'], dog['Leeftijd'], dog['Andere_hond'], dog['Andere_dieren'], dog['Kinderen'], dog['Tuin'], dog['Knuffelbeer'], dog['Training_sport'], dog['BCDp'], dog['Beschrijving'], dog['Image'], dog['Summary'], dog['Links'])
 
-    def append_dog_data(self, id, name, sex, size, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, summary, score= 0):
+    def append_dog_data(self, id, name, sex, size, age, dogfriendly, petfriendly, childfriendly, gardenreq, hug, training, BCD, Description, image, summary, label= '',links,score= 0):
 
         new_row = pd.Series({'dog_id': id, 'name': name, 'size': size, 'sex': sex,
              'age': age, 'dogfriendly': dogfriendly, 'petfriendly': petfriendly, 'childfriendly': childfriendly,'gardenreq': gardenreq,
-             'hug': hug,'training': training,'BCD': BCD,'score': score,'description': Description, 'image': image, 'summary': summary})
+             'hug': hug,'training': training,'BCD': BCD,'score': score,'description': Description, 'image': image, 'summary': summary,'link': links, 'label':label})
         self.__recommender_data = pd.concat([self.__recommender_data, new_row.to_frame().T], ignore_index=True) #aangezien een pd.series 1 kolom geeft met de vragen als rij moeten we transponern met .T
 
     def add_points(self, id, score):
@@ -26,12 +27,15 @@ class Databank:
             if dog['dog_id'] == id:
                 self.__recommender_data.loc[row, 'score']+= score
 
+
+
     def make_recommendation(self, inputdata):
         for vraagnum, data in inputdata.iterrows():
 
 
             input = data['antwoorden']
             gewicht = data['gewichten']
+            dog_list = []
 
             for row, dog in self.give_data().iterrows():  # we gaan door elke hond in onze database
 
@@ -54,28 +58,28 @@ class Databank:
                 #Note to self: te harde codering!
                 if vraagnum == 3:
                     if dog['dogfriendly'] == input and input == 'Ja, een reu':
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
                     if dog['dogfriendly'] == input and input == 'Ja, een teef':
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
                     if dog['dogfriendly'] == input and input == 'Ja, meerdere honden':
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
                     if dog['dogfriendly'] == input and input == 'Nee':
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
                 # VRAAG 5 want deze vragen hebben dezelfde puntenlogica en 1/1 matching met de dataset
                 if vraagnum == 4:
                     if dog['petfriendly'] == input:  # V3: Gewicht beslissen mensen zelf
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
 #-------- Vanaf hier speciale logica vragen:
                 # Note to self: te harde codering!
                 # VRAAG 6: Wat voor gezinssituatie heeft u? (eigenschap: ja, grote, nee)
                 if vraagnum == 5:
                     if dog['childfriendly'] == input and input == "Enkel kinderen boven 12 jaar":
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
                     else:  # V6 als er dus enkel volwassene zijn krijgt iedereen een punt
                         self.give_all()
@@ -84,7 +88,7 @@ class Databank:
                 # VRAAG 7: Heeft u een omheinde tuin? (eigenschap: default, moet tuin: ja)
                 if vraagnum == 6:
                     if dog['gardenreq'] == input and input == "Nee":  # V7, indien input "nee" dan enkel honden met
-                        self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
+                        self.add_points(dog['dog_id'], 2.5 + ((gewicht - 50) / 50))
 
                     if dog['gardenreq'] == input and input == "Ja":  # V7, indien input "ja" dan alle honden een punt, equivalent als zeggen dat niemand iets krijgt.
                         self.give_all()
@@ -146,6 +150,7 @@ class Databank:
             dicti["imgURL"] = data['image']
             dicti["description"] = data['description']
             dicti["summary"] = data['summary']
+            dicti["link"] = data['link']
             lijst.append(dicti)
         return lijst
 
@@ -167,16 +172,17 @@ class Databank:
         workbook = load_workbook('./records.xlsx')  # je laadt een workbook
         ws = workbook.active  # je activeert e workbook
         lijst=[]
-        for row in ws.iter_rows(min_row=2, max_col= 17):
+        for row in ws.iter_rows(min_row=2, max_col= 21):
             if row[0].value == id: #Dus de rij met het specifieke ID maar de id moet niet terug meegegeven worden
-                for x in range(0,13):
-                    if x==0 or x==4 or x==8 or x==12:
+                for x in range(0,16):
+                    if x==0 or x==5 or x==10 or x==15:
 
                         dicti={}
                         dicti["name"] = row[1+x].value
                         dicti["imgURL"] = row[2+x].value
                         dicti["description"] = row[3+x].value
                         dicti["summary"] = row[4+x].value
+                        dicti["link"] = row[5+x].value
                         lijst.append(dicti)
                         lijst
         return lijst
@@ -187,18 +193,19 @@ class Databank:
         for index in ws.iter_rows(min_row=2):
             if index[0].value == id: #Dus de rij met het specifieke ID maar de id moet niet terug meegegeven worden
 
-                for column in "UVWX":  # Here you can add or reduce the columns
-                    if column == "U":
+                for column in ["Y", "Z", "AA", "AB"]:  # Here you can add or reduce the columns
+                    if column == "Y":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value  = lijst[0]# the value of the specific cell
-                    if column == "V":
+                    if column == "Z":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[1]  # the value of the specific cell
-                    if column == "W":
+                    if column == "AA":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[2]  # the value of the specific cell
-                    if column == "X":
+                    if column == "AB":
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[3]  # the value of the specific cell
 
         workbook.save('./records.xlsx')
+
