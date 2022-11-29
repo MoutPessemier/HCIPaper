@@ -209,3 +209,21 @@ class Databank:
 
         workbook.save('./records.xlsx')
 
+
+
+Sys = Databank()
+Sys.create_dog()
+
+#OPM: dit is een test input en volledig fictief / Voor de meeste input zullen een paar honden dezelfde scores hebben, dit is normaal aangezien de dataset beperkt is en dus niet elke hond uniek
+antwoorden = ['Reu', 'Eerder groot', 'Gouden senioren jaren (2014 en ouder)', 'Nee', 'Nee', 'Nee', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Nee'] #Met deze antwoorden vind je Max en Sky
+gewichten = [100, 50, 50, 50, 50, 100, 10, 80, 100, 50] #je kan spelen met de gewichten, 50 wilt zeggen neutraal.
+#antwoorden
+#gewichten = []
+d= {'antwoorden': antwoorden, 'gewichten': gewichten}
+inputdata = pd.DataFrame(d)
+
+
+x= Sys.make_recommendation(inputdata)
+print(x)
+
+
