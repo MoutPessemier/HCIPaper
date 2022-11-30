@@ -6,7 +6,6 @@ class Databank:
 
     def __init__(self):
         self.__recommender_data = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','summary','link','score'])
-        self.__filterdata = pd.DataFrame(columns=['dog_id', 'name', 'sex', 'size', 'age', 'dogfriendly', 'petfriendly','childfriendly','gardenreq','hug','training','BCD','Description','image','summary','link','score'])
 
     def create_dog(self):
 
