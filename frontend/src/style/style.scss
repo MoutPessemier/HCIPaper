@@ -36,8 +36,8 @@ img {
   &.dog-img {
     min-width: 309px;
     max-width: 309px;
-    min-height: 412px;
-    max-height: 412px;
+    min-height: 420px;
+    max-height: 420px;
   }
 }
 
@@ -82,6 +82,9 @@ p {
   &.emp {
     font-weight: 600;
     color: #0d6efd;
+  }
+  &.no-top {
+    margin-top: 0 !important;
   }
 }
 
@@ -196,8 +199,11 @@ div {
     align-items: center;
   }
   &.satisfaction-container {
-    background-color: #d08e1220;
-    padding: 0 10em;
+    background-color: #d08e1275;
+    padding: 1em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    // padding: 0 10em;
   }
   &.btn-container {
     display: flex;
@@ -205,8 +211,8 @@ div {
     justify-content: space-around;
     align-content: center;
     align-items: center;
-    background-color: #d08e1220;
-    padding: 0 10em;
+    // background-color: #d08e1220;
+    // padding: 0 10em;
   }
 }
 
