@@ -3,12 +3,6 @@ import pandas as pd
 from flask import Flask, request
 from flask_cors import CORS
 import json
-#
-# http://localhost:1234/pages/formType1.html
-# http://localhost:1234/pages/formType2.html
-# http://localhost:1234/pages/formType3.html
-
-#TODO: Endpoint maken zodat de onderzoeksvragen kunnen worden opgeslaan
 
 app = Flask(__name__)
 CORS(app)
@@ -38,7 +32,6 @@ class RestAPI:
                 formType = value
 
             if key1 in questions:
-
                 for key2, content in value.items():
                     if key2 == 'value':
                         antwoorden.append(content)
@@ -46,12 +39,12 @@ class RestAPI:
                         gewichten.append(int(content))
 
         d = {'antwoorden': antwoorden, 'gewichten': gewichten}
-        inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
-        x= Sys.make_recommendation(inputdata) #puntentoekenning
+        inputdata = pd.DataFrame(d)
+        x= Sys.make_recommendation(inputdata)
         x.append({'startTime':startTime})
         x.append({'endTime': endTime})
         x.append({'formType': formType})
-        ident = Sys.export_excel(x) #schrijven het weg naar excel
+        ident = Sys.export_excel(x)
         data_json= json.dumps({"id":ident})
         return data_json
 
