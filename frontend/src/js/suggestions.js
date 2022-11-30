@@ -1,5 +1,37 @@
 import * as bootstrap from 'bootstrap';
 
+const dogIds = {
+  Ara: '1gl06jI6yeRuq9GQ8Rs3hguHu1esxf07p',
+  Bailey: '1rGHvLGfgdmZ8lBMnJLcxKaiOk6IgsN_j',
+  Bayka: '1nhlIoOcxW7y5mSE7J02oaEqjTnyvicJr',
+  Bessie: '1XIZOTKprHcLit5UK26LLZHFw74HvWA8B',
+  Bibi: '1W8TH3fn1EqJNFsiJrsH5PqoxIScqGaA9',
+  Biegel: '1INwHCu6Pul6W3dk13eoqnTSyNU1oA8e4',
+  Boelie: '1E_s2_-udropNhRxagnQaTkd7XjDk5YIh',
+  Dario: '1NOx1VIAriU_bLRxSqCy16wijlT39xZ7h',
+  Didi: '1DzfrRQDo0jQ9pO8O-iwLitOidUVmpi2j',
+  Henkie: '13EliVTo8aJHOq691NsfjuE4U8H4QEmXn',
+  Imara: '1OLblcDKYLzseQzkKpjn6jaryYDBG9-ml',
+  Junior: '1UOPMJpCCx6z5oli3ph7AOnJ-nvLpaifi',
+  Kita: '1Vh3IY2cQPH_z06mdvsdY2sqUmfANAd4Y',
+  Lucky: '1poHPD0jMgYbGOUyx2H2v22E0PiKtnvoz',
+  Max: '14lD754dc8QadkQLYzzdciXXccSvs9Al0',
+  Mini: '17KGW-NJS7aRKaSX-X-ulNVmB6Wzgncem',
+  Molly: '1sycVfzlMh_-7SsTae4e_yvk-xPmqVkX8',
+  Rita: '1ewFvykzoAqcOVbu4LjSCFNY2K-0pHBn0',
+  Rosa: '1ppFmgKin77_X4ixls9GWw8yV9AybsfmI',
+  Ryna: '1NYa-GjsUssc2a-hrLI3rcqehpEwLtCOu',
+  Skippy: '1rvfDOsitH05_-Ueigw8UhQfteKzBTAfz',
+  Sky: '1G4plAIZyJur5LYxe3yraz66i50pAWaOR',
+  Storm: '1iNJpTANHJKm-X4V8BGXUu02Fm6f9Ts9I',
+  Thor: '11Lt2SKW1usQhZVhmH4vU3JOjD3Cdo0Jy',
+  Tipsie: '1-mQ4LWNg5ICwLEGdvP21I0JCWm3AE7yR',
+  Vicky: '1QvFXeL9z59m9stQ2Qv2YFqb7aNrpQ5Ni',
+  Zita: '1GTvFxdFuZ1j95WysZL16g4Uful4pCGfc',
+  Zora: '1eLKPY7xLCFnDlPxifA-mDnuC0TdvmvTC',
+  Zuma: '1zpqUR6NFUqgDSHLjvLfaOwbZawivk84U',
+};
+
 const generateCards = (container, dog) => {
   const card = document.createElement('div');
   card.classList.add('card');
@@ -12,7 +44,7 @@ const generateCards = (container, dog) => {
   cardImg.classList.add('img-fluid');
   cardImg.classList.add('dog-img');
   cardImg.setAttribute('alt', `Image of dog ${dog.name}`);
-  cardImg.setAttribute('src', dog.imgURL);
+  cardImg.setAttribute('src', `https://drive.google.com/uc?export=view&id=${dogIds[`${dog.name}`]}`);
 
   const cardBody = document.createElement('div');
   cardBody.classList.add('card-body');
