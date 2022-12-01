@@ -151,8 +151,14 @@ const getSliderValueForQuestion = name => {
 const init = () => {
   const cardsContainer = document.getElementById('cards-container');
   const modalContainer = document.getElementById('modal-container');
+  // fetch(
+  //   'http://127.0.0.1:5000/getRecommendation?' +
+  //     new URLSearchParams({
+  //       id: window.localStorage.getItem('referenceId'),
+  //     })
+  // )
   fetch(
-    'http://127.0.0.1:5000/getRecommendation?' +
+    'http://picasso.experiments.cs.kuleuven.be:3490/getRecommendation?' +
       new URLSearchParams({
         id: window.localStorage.getItem('referenceId'),
       })
@@ -207,7 +213,8 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    fetch('http://127.0.0.1:5000/giveResearch', options)
+    // fetch('http://127.0.0.1:5000/giveResearch', options)
+    fetch('http://picasso.experiments.cs.kuleuven.be:3490/giveResearch', options)
       .then(res => res.json())
       .then(data => {
         console.log(data);
