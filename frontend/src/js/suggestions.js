@@ -151,8 +151,14 @@ const getSliderValueForQuestion = name => {
 const init = () => {
   const cardsContainer = document.getElementById('cards-container');
   const modalContainer = document.getElementById('modal-container');
+  // fetch(
+  //   'http://127.0.0.1:5000/getRecommendation?' +
+  //     new URLSearchParams({
+  //       id: window.localStorage.getItem('referenceId'),
+  //     })
+  // )
   fetch(
-    'http://127.0.0.1:5000/getRecommendation?' +
+    'http://picasso.experiments.cs.kuleuven.be:3490/getRecommendation?' +
       new URLSearchParams({
         id: window.localStorage.getItem('referenceId'),
       })
@@ -163,6 +169,22 @@ const init = () => {
         generateModal(modalContainer, dog);
         generateCards(cardsContainer, dog);
       });
+      const a1 = document.getElementById('dog1');
+      a1.innerHTML = data.recommendations[0].name;
+      a1.setAttribute('href', data.recommendations[0].link);
+      a1.classList.add('inline');
+      const a2 = document.getElementById('dog2');
+      a2.innerHTML = data.recommendations[1].name;
+      a2.setAttribute('href', data.recommendations[1].link);
+      a2.classList.add('inline');
+      const a3 = document.getElementById('dog3');
+      a3.innerHTML = data.recommendations[2].name;
+      a3.setAttribute('href', data.recommendations[2].link);
+      a3.classList.add('inline');
+      const a4 = document.getElementById('dog4');
+      a4.innerHTML = data.recommendations[3].name;
+      a4.setAttribute('href', data.recommendations[3].link);
+      a4.classList.add('inline');
     })
     .catch(err => console.log(err));
 
@@ -174,6 +196,7 @@ const init = () => {
   });
   const thanksP = document.getElementById('thanks');
   const submitBtn = document.getElementById('submit');
+  const checkDogs = document.getElementById('check-dogs');
   submitBtn.addEventListener('click', e => {
     const finalTime = new Date().toString().split(' ')[4];
     const body = {
@@ -190,13 +213,15 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    fetch('http://127.0.0.1:5000/giveResearch', options)
+    // fetch('http://127.0.0.1:5000/giveResearch', options)
+    fetch('http://picasso.experiments.cs.kuleuven.be:3490/giveResearch', options)
       .then(res => res.json())
       .then(data => {
         console.log(data);
         submitBtn.classList.add('hidden');
         backBtn.classList.remove('hidden');
         thanksP.classList.remove('hidden');
+        checkDogs.classList.remove('hidden');
       })
       .catch(err => console.log(err));
   });
