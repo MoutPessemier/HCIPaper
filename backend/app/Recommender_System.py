@@ -35,17 +35,17 @@ class Databank:
 
             for row, dog in self.give_data().iterrows():
 
-                # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
+                # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 0:
                     if dog['sex'] == input:
                         self.add_points(dog['dog_id'], 4.5 + ((gewicht - 50) / 50))
 
-                # VRAAG 2: Welk grootte prefereert u?  (eigenschap: geslacht → reu, teef)
+                # VRAAG 2: Welk grootte prefereert u?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 1:
                     if dog['size'] == input:
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
 
-                # VRAAG 3: Leeftijd?  (eigenschap: geslacht → reu, teef)
+                # VRAAG 3: Leeftijd?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 2:
                     if dog['age'] == input:
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
