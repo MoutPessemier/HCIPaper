@@ -147,7 +147,7 @@ class Databank:
         return lijst
 
     def export_excel(self, lijst):
-        workbook = load_workbook('./records.xlsx')
+        workbook = load_workbook('records.xlsx')
         ws = workbook.active
         identificatie= id(lijst)
         inzet = [identificatie]
@@ -157,7 +157,7 @@ class Databank:
 
         ws.append(inzet)
         workbook.template = False
-        workbook.save('./records.xlsx')
+        workbook.save('records.xlsx')
         return identificatie
 
     def read_excel(self, id):
