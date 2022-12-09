@@ -81,20 +81,20 @@ class RestAPI:
 
         return {"Message:": "Entry Saved"}
 
-@app.route('/getId', methods=['POST'])
+@app.route('/fmmi9/getId', methods=['POST'])
 def getID():
     REST = RestAPI()
     data = request.get_json()
     return REST.give_id(data)
 
-@app.route('/getRecommendation', methods=['GET'])
+@app.route('/fmmi9/getRecommendation', methods=['GET'])
 def getRecommendations():
     REST = RestAPI()
     args = request.args
     id = args.get('id')
     return REST.give_recommendation(id)
 
-@app.route('/giveResearch', methods=['POST'])
+@app.route('/fmmi9/giveResearch', methods=['POST'])
 def insert_question():
     REST = RestAPI()
     data = request.get_json()

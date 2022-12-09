@@ -158,7 +158,7 @@ const init = () => {
   //     })
   // )
   fetch(
-    'http://picasso.experiments.cs.kuleuven.be:3490/getRecommendation?' +
+    'https://augment.cs.kuleuven.be/fmmi9/getRecommendation?' +
       new URLSearchParams({
         id: window.localStorage.getItem('referenceId'),
       })
@@ -214,7 +214,7 @@ const init = () => {
       body: JSON.stringify(body),
     };
     // fetch('http://127.0.0.1:5000/giveResearch', options)
-    fetch('http://picasso.experiments.cs.kuleuven.be:3490/giveResearch', options)
+    fetch('https://augment.cs.kuleuven.be/fmmi9/giveResearch', options)
       .then(res => res.json())
       .then(data => {
         console.log(data);
