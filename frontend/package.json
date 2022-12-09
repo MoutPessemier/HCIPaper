@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel --open",
     "build": "parcel build",
-    "deploy": "parcel build; firebase deploy"
+    "deploy": "rm -rf .parcel-cache/; rm -rf dist/; parcel build; firebase deploy"
   },
   "author": "Mout Pessemier",
   "license": "ISC",

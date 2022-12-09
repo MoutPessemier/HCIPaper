@@ -100,7 +100,7 @@ def insert_question():
     data = request.get_json()
     return REST.export_research_question(data)
 
-@app.route('/wakeUp')
+@app.route('/fmmi9/wakeUp')
 def wakeup():
     return {'status': 'OK'}
 
