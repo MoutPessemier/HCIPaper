@@ -147,7 +147,7 @@ class Databank:
         return lijst
 
     def export_excel(self, lijst):
-        workbook = load_workbook('./records.xlsx')
+        workbook = load_workbook('./app/records.xlsx')
         ws = workbook.active
         identificatie= id(lijst)
         inzet = [identificatie]
@@ -157,11 +157,11 @@ class Databank:
 
         ws.append(inzet)
         workbook.template = False
-        workbook.save('./records.xlsx')
+        workbook.save('./app/records.xlsx')
         return identificatie
 
     def read_excel(self, id):
-        workbook = load_workbook('./records.xlsx')
+        workbook = load_workbook('./app/records.xlsx')
         ws = workbook.active
         lijst=[]
         for row in ws.iter_rows(min_row=2, max_col= 21):
@@ -180,7 +180,7 @@ class Databank:
         return lijst
 
     def find_and_export(self, id, lijst):
-        workbook = load_workbook('./records.xlsx')
+        workbook = load_workbook('./app/records.xlsx')
         ws = workbook.active
         for index in ws.iter_rows(min_row=2):
             if index[0].value == id:
@@ -199,5 +199,5 @@ class Databank:
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[3]
 
-        workbook.save('./records.xlsx')
+        workbook.save('./app/records.xlsx')
 
