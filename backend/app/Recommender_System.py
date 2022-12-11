@@ -27,13 +27,15 @@ class Databank:
                 self.__recommender_data.loc[row, 'score']+= score
 
     def make_recommendation(self, inputdata):
-
+        self.reset_all()
         for vraagnum, data in inputdata.iterrows():
 
             input = data['antwoorden']
             gewicht = data['gewichten']
 
             for row, dog in self.give_data().iterrows():
+
+
 
                 # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 0:
@@ -115,6 +117,10 @@ class Databank:
         for row, dog in self.__recommender_data.iterrows():
             self.__recommender_data.loc[row, 'score']+= 1/len(self.__recommender_data)
 
+    def reset_all(self):
+        for row, dog in self.__recommender_data.iterrows():
+            self.__recommender_data.loc[row, 'score']= 0
+
     def give_data(self):
         return self.__recommender_data
 
@@ -156,7 +162,6 @@ class Databank:
                 inzet.append(value)
 
         ws.append(inzet)
-        workbook.template = False
         workbook.save('/app/records.xlsx')
         return identificatie
 
