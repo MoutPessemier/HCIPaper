@@ -11,10 +11,10 @@ const dogIds = {
   Dario: '1NOx1VIAriU_bLRxSqCy16wijlT39xZ7h',
   Didi: '1DzfrRQDo0jQ9pO8O-iwLitOidUVmpi2j',
   Henkie: '13EliVTo8aJHOq691NsfjuE4U8H4QEmXn',
+  Herman: '1Q70hOl41YUbpOfgEqPxtjMd28A7sl1yt',
   Imara: '1OLblcDKYLzseQzkKpjn6jaryYDBG9-ml',
   Junior: '1UOPMJpCCx6z5oli3ph7AOnJ-nvLpaifi',
   Kita: '1Vh3IY2cQPH_z06mdvsdY2sqUmfANAd4Y',
-  Lucky: '1poHPD0jMgYbGOUyx2H2v22E0PiKtnvoz',
   Max: '14lD754dc8QadkQLYzzdciXXccSvs9Al0',
   Mini: '17KGW-NJS7aRKaSX-X-ulNVmB6Wzgncem',
   Molly: '1sycVfzlMh_-7SsTae4e_yvk-xPmqVkX8',
@@ -152,7 +152,7 @@ const init = () => {
   const cardsContainer = document.getElementById('cards-container');
   const modalContainer = document.getElementById('modal-container');
   // fetch(
-  //   'http://127.0.0.1:5000/getRecommendation?' +
+  //   'http://127.0.0.1:3490/fmmi9/getRecommendation?' +
   //     new URLSearchParams({
   //       id: window.localStorage.getItem('referenceId'),
   //     })
@@ -213,7 +213,7 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    // fetch('http://127.0.0.1:5000/giveResearch', options)
+    //fetch('http://127.0.0.1:3490/fmmi9/giveResearch', options)
     fetch('https://augment.cs.kuleuven.be/fmmi9/giveResearch', options)
       .then(res => res.json())
       .then(data => {

@@ -51,7 +51,7 @@ const init = () => {
       },
       body: JSON.stringify(body),
     };
-    // fetch('http://127.0.0.1:5000/getId', options)
+    //fetch('http://127.0.0.1:3490/fmmi9/getId', options)
     fetch('https://augment.cs.kuleuven.be/fmmi9/getId', options)
       .then(res => res.json())
       .then(data => {
