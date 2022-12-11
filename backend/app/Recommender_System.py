@@ -27,7 +27,7 @@ class Databank:
                 self.__recommender_data.loc[row, 'score']+= score
 
     def make_recommendation(self, inputdata):
-
+        self.reset_all()
         for vraagnum, data in inputdata.iterrows():
 
             input = data['antwoorden']
@@ -35,17 +35,19 @@ class Databank:
 
             for row, dog in self.give_data().iterrows():
 
-                # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht → reu, teef)
+
+
+                # VRAAG 1: Welk geslacht prefereert u?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 0:
                     if dog['sex'] == input:
                         self.add_points(dog['dog_id'], 4.5 + ((gewicht - 50) / 50))
 
-                # VRAAG 2: Welk grootte prefereert u?  (eigenschap: geslacht → reu, teef)
+                # VRAAG 2: Welk grootte prefereert u?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 1:
                     if dog['size'] == input:
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
 
-                # VRAAG 3: Leeftijd?  (eigenschap: geslacht → reu, teef)
+                # VRAAG 3: Leeftijd?  (eigenschap: geslacht --> reu, teef)
                 if vraagnum == 2:
                     if dog['age'] == input:
                         self.add_points(dog['dog_id'], 1 + ((gewicht - 50) / 50))
@@ -115,6 +117,10 @@ class Databank:
         for row, dog in self.__recommender_data.iterrows():
             self.__recommender_data.loc[row, 'score']+= 1/len(self.__recommender_data)
 
+    def reset_all(self):
+        for row, dog in self.__recommender_data.iterrows():
+            self.__recommender_data.loc[row, 'score']= 0
+
     def give_data(self):
         return self.__recommender_data
 
@@ -147,7 +153,7 @@ class Databank:
         return lijst
 
     def export_excel(self, lijst):
-        workbook = load_workbook('/app/records.xlsx')
+        workbook = load_workbook('records.xlsx')
         ws = workbook.active
         identificatie= id(lijst)
         inzet = [identificatie]
@@ -156,12 +162,11 @@ class Databank:
                 inzet.append(value)
 
         ws.append(inzet)
-        workbook.template = False
-        workbook.save('/app/records.xlsx')
+        workbook.save('records.xlsx')
         return identificatie
 
     def read_excel(self, id):
-        workbook = load_workbook('/app/records.xlsx')
+        workbook = load_workbook('records.xlsx')
         ws = workbook.active
         lijst=[]
         for row in ws.iter_rows(min_row=2, max_col= 21):
@@ -180,7 +185,7 @@ class Databank:
         return lijst
 
     def find_and_export(self, id, lijst):
-        workbook = load_workbook('/app/records.xlsx')
+        workbook = load_workbook('records.xlsx')
         ws = workbook.active
         for index in ws.iter_rows(min_row=2):
             if index[0].value == id:
@@ -199,5 +204,5 @@ class Databank:
                         cell_name = "{}{}".format(column, index[0].row)
                         ws[cell_name].value = lijst[3]
 
-        workbook.save('/app/records.xlsx')
+        workbook.save('records.xlsx')
 
