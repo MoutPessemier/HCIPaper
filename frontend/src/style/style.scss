@@ -85,6 +85,10 @@ p {
   &.no-top {
     margin-top: 0 !important;
   }
+  &.w-280 {
+    width: 280px;
+    margin-top: 0.35em;
+  }
 }
 
 label {
