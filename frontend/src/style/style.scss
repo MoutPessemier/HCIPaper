@@ -81,7 +81,6 @@ p {
   }
   &.emp {
     font-weight: 600;
-    // color: #0d6efd;
   }
   &.no-top {
     margin-top: 0 !important;
@@ -91,6 +90,9 @@ p {
 label {
   &.bold {
     font-weight: 500;
+  }
+  &.center {
+    text-align: center !important;
   }
 }
 
@@ -119,6 +121,9 @@ a {
 div {
   &.w-280 {
     width: 280px;
+  }
+  &.w-80p {
+    width: 80%;
   }
   &.center {
     margin: 0 auto;
@@ -155,6 +160,7 @@ div {
     margin-bottom: 3em;
     width: 420px;
     padding: 0.5em;
+    align-items: center;
   }
   &.range-slider {
     display: flex;
@@ -203,7 +209,6 @@ div {
     padding: 1em;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    // padding: 0 10em;
   }
   &.btn-container {
     display: flex;
@@ -211,13 +216,16 @@ div {
     justify-content: space-around;
     align-content: center;
     align-items: center;
-    // background-color: #d08e1220;
-    // padding: 0 10em;
   }
 }
 
 input[type='range'] {
   max-width: 280px !important;
+}
+
+textarea {
+  min-height: 100px !important;
+  resize: none;
 }
 
 button {

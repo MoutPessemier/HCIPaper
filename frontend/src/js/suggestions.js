@@ -148,6 +148,11 @@ const getSliderValueForQuestion = name => {
   }
 };
 
+const getOpenQuestionValue = name => {
+  const txtarea = document.getElementById(name);
+  return txtarea.value || '';
+};
+
 const init = () => {
   const cardsContainer = document.getElementById('cards-container');
   const modalContainer = document.getElementById('modal-container');
@@ -205,6 +210,7 @@ const init = () => {
       Q1: getSliderValueForQuestion(1),
       Q2: getSliderValueForQuestion(2),
       Q3: getSliderValueForQuestion(3),
+      openVraag: getOpenQuestionValue('txtarea'),
     };
     const options = {
       method: 'POST',
@@ -217,7 +223,6 @@ const init = () => {
     fetch('https://augment.cs.kuleuven.be/fmmi9/giveResearch', options)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         submitBtn.classList.add('hidden');
         backBtn.classList.remove('hidden');
         thanksP.classList.remove('hidden');
