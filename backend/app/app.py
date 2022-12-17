@@ -10,9 +10,6 @@ CORS(app)
 Sys = R.Databank()
 Sys.create_dog()
 
-siteurl= 'https://kuleuven-my.sharepoint.com/:f:/g/personal/nam_le_student_kuleuven_be/Eu_aDZYqMzNCnBFr_WdHRQkBN7OvimXxcHx4x0x8YuiPqQ?e=WP8HyT'
-
-
 class RestAPI:
 
     def give_id(self, data):
