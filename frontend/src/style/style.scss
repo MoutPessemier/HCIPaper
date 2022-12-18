@@ -89,6 +89,9 @@ p {
     width: 280px;
     margin-top: 0.35em;
   }
+  &.invis {
+    visibility: hidden;
+  }
 }
 
 label {
