@@ -253,7 +253,7 @@ class Databank:
 
     def export_mongo(self, lijst):
 
-        identificatie = id(lijst)
+        #identificatie = id(lijst)
         data = lijst
         ExceptionHandling = ""
 
@@ -267,10 +267,10 @@ class Databank:
         data.append({"exception": ExceptionHandling})
 
         x= pm.get_database()
-        pm.insertData(identificatie, data, x)
+        y= pm.insertData(data, x)
         pm.exitdb()
 
-        return identificatie
+        return y
 
     def read_mongo(self, id):
 
@@ -288,42 +288,4 @@ class Databank:
 
         return feedback
 
-#
-# Sys = Databank()
-# Sys.create_dog()
-# #
-# # #OPM: zet 1 van de antwoorden uit commentaar om te testen
-# # #antwoorden = ['Teef', 'Eerder groot', 'Gouden senioren jaren (2014 en ouder)', 'Ja, een reu', 'Ja', 'Nee', 'Nee', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Nee']
-# # #antwoorden = ['Reu', 'Eerder klein', 'Eerder jong (2020 en jonger)', 'Ja, een teef', 'Nee', 'Enkel kinderen boven 12 jaar', 'Ja', 'Ja, knuffelkontjes!', 'Ja, graag!', 'Ja']
-# # #antwoorden = ['Teef', 'Middelmaatje', 'Volwassen (2015-2019)', 'Nee', 'Ja', 'Nee', 'Nee', 'Nee', 'Ja, graag!', 'Nee']
-# # #antwoorden = ['Reu', 'Eerder groot', 'Volwassen (2015-2019)', 'Ja, een teef', 'Ja', 'Nee', 'Nee', 'Ja, knuffelkontjes!', 'Ja, graag!', 'Nee']
-# # #antwoorden = ['Teef', 'Middelmaatje', 'Gouden senioren jaren (2014 en ouder)', 'Ja, een reu', 'Ja', 'Nee', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Ja']
-# #
-# # #antwoorden = ['Reu', 'Middelmaatje', 'Volwassen (2015-2019)', 'Ja, een reu', 'Nee']
-# #
-# antwoorden = ['Teef', 'Middelmaatje', 'Volwassen (2015-2019)', 'Nee', 'Nee', 'Nee', 'Nee', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Nee']
-# # #antwoorden = ['Teef', 'Middelmaatje', 'Gouden senioren jaren (2014 en ouder)', 'Ja, een reu', 'Nee', 'Nee', 'Nee', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Ja']
-# # antwoorden = ['Teef', 'Middelmaatje', 'Gouden senioren jaren (2014 en ouder)', 'Ja, een teef', 'Nee', 'Nee', 'Ja', 'Ja, knuffelkontjes!', 'Dat is voor mij niet zo belangrijk', 'Ja']
-# #
-# #
-# # #gewichten = [100, 50, 50, 50, 50] #je kan spelen met de gewichten, 50 wilt zeggen neutraal.
-# gewichten = [100, 50, 50, 50, 50, 100, 50, 50, 50, 50]
-# # d= {'antwoorden': antwoorden, 'gewichten': gewichten}
-# # inputdata = pd.DataFrame(d)  # dataframe maken; handig voor doorzoeken
-# #
-# #
-# #
-# # #OUTPUT:
-# #
-# # print("Dit zijn uw antwoorden:", antwoorden)
-# # print("Met gewichten", gewichten)
-# # print('\n')
-# #x= Sys.make_recommendation(inputdata)
-# # #print(x)
-# # #Sys.read_mongo(140194371363648)
-# #ident = Sys.export_mongo(x)
-# #print("export succes with id", ident)
-# lijst =[{"V1": 4}, {"V2": 3}, {"V3": 7}, {"V4": "Charlotte is een prot"}, {"finalTime": "00:00:01"}]
-# print(Sys.find_and_export(140250112720960, lijst))
-# #
-# # #We geven de data weer/output naar JSON
+    #a change
