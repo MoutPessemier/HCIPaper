@@ -6,9 +6,9 @@ def get_database():
     CONNECTION_STRING = "mongodb://root:6wTYD4gi78yIgTPx@ac-vhitqap-shard-00-00.rj2pktu.mongodb.net:27017,ac-vhitqap-shard-00-01.rj2pktu.mongodb.net:27017,ac-vhitqap-shard-00-02.rj2pktu.mongodb.net:27017/?ssl=true&replicaSet=atlas-14026p-shard-0&authSource=admin&retryWrites=true&w=majority"
     client = MongoClient(CONNECTION_STRING)
     dbname = client['dogs']  # dogs database
-    records = dbname["test"]  #hier creer je een nieuwe collection of open je een bestaande
+    records = dbname["records"]  #hier creer je een nieuwe collection of open je een bestaande
     return records
-#here is a change
+
 def insertData(data, collection):
 
     dog = []
@@ -32,7 +32,7 @@ def insertData(data, collection):
                 if key == "exception":
                     message = value
 
-    id_index = collection.create_index("_id")
+    collection.create_index("_id")
     item_1 = {"dogs": dog, "StartTime": start, "Endtime": end, "FormType": ftype, "Message": message}
     _id = collection.insert_one(item_1)
     y = _id.inserted_id

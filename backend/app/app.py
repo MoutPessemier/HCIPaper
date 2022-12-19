@@ -4,7 +4,7 @@ from flask import Flask, request
 from flask_cors import CORS
 import json
 
-#A change
+
 app = Flask(__name__)
 CORS(app)
 Sys = R.Databank()
