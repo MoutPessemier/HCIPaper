@@ -50,7 +50,7 @@ class RestAPI:
         return data_json
 
     def give_recommendation(self, id):
-        dogs = Sys.read_mongo(int(id))
+        dogs = Sys.read_mongo(id)
         return {"recommendations": dogs}
 
     def export_research_question(self, data):
@@ -66,7 +66,7 @@ class RestAPI:
             if key1 == "finalTime":
                 finalTime = {"finalTime": value}
             if key1 == "ID":
-                ID = int(value)
+                ID = value
             if key1 == "Q1":
                 V1 = {"V1": value}
             if key1 == "Q2":

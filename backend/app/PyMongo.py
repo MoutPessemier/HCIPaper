@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from pandas import DataFrame as df
+from bson.objectid import ObjectId
 
 def get_database():
     CONNECTION_STRING = "mongodb://root:6wTYD4gi78yIgTPx@ac-vhitqap-shard-00-00.rj2pktu.mongodb.net:27017,ac-vhitqap-shard-00-01.rj2pktu.mongodb.net:27017,ac-vhitqap-shard-00-02.rj2pktu.mongodb.net:27017/?ssl=true&replicaSet=atlas-14026p-shard-0&authSource=admin&retryWrites=true&w=majority"
@@ -8,7 +9,7 @@ def get_database():
     records = dbname["records"]  #hier creer je een nieuwe collection of open je een bestaande
     return records
 
-def insertData(id, data, collection):
+def insertData(data, collection):
 
     dog = []
     start = ""
@@ -31,13 +32,16 @@ def insertData(id, data, collection):
                 if key == "exception":
                     message = value
 
-    id_index = collection.create_index("_id")
-    item_1 = {"_id": id, "dogs": dog, "StartTime": start, "Endtime": end, "FormType": ftype, "Message": message}
-    collection.insert_one(item_1)
+    collection.create_index("_id")
+    item_1 = {"dogs": dog, "StartTime": start, "Endtime": end, "FormType": ftype, "Message": message}
+    _id = collection.insert_one(item_1)
+    y = _id.inserted_id
+    y = str(y)
+    return y
 
 def getData(id,collection):
 
-    item_details = collection.find({"_id": id})
+    item_details = collection.find({"_id": ObjectId(id)})
     panda = df(item_details)
     item = 0
     for row, data in panda.iterrows():
@@ -72,7 +76,7 @@ def addResearch(id, data, collection):
     new_value5 = {"$set": {"FinalTime": final}}
 
 
-    filtered = {"_id": id}
+    filtered = {"_id": ObjectId(id)}
 
     collection.update_one(filtered, new_value1)
     collection.update_one(filtered, new_value2)
