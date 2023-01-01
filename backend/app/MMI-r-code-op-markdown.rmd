@@ -1,0 +1,289 @@
+---
+title: "Dog Adoption Research"
+author: "Charlotte Schneider, Nam Lê, Jackie Vanheusden, Mout Pessemier"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+date: "28-12-2022"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Introduction
+
+In this research paper, we analyse the data captured from our recommendation system to answer the following research questions: 
+
+1.How does varying levels of control impact user satisfaction?
+
+2.How does varying levels of control impact the time spent?
+
+The high-level process flow of our recommendation and how we captured our data is as follows. First, the participants are assigned to 1 of 3 questionnaires (FormTypes). They fill in this questionnaire and are then given 4 dog recommendations. Below those 4 recommendations there will be 4 research questions. 
+
+The "FormType" will be our control variable and V1, V2, V3 and V4 will be our research answers. The StartTime denotes the moment the participants start the questionnaire, the EndTime then gives the time stamp of when they finish this questionnaire. Finally, the FinalTime denotes the end of the whole process. 
+
+## 1. Setup 
+
+We first need to install and load some packages. The following packages were installed: *library(lubridate), library(anytime), library(dplyr), library(pwr), library(ggplot2), library(readxl), library(stargazer), library(plm),  library(lmtest), library(orcutt), library(Hmisc), library(AER), library(aTSA), library(sandwich), library(clubSandwich), library(car), library(corrplot), library(sjPlot), library(gmodels), library(lme4), library(emmeans), library(gmodels), library(multcomp), 
+library(lmerTest), library(readxl), library(epiDisplay), library(Epi), library(InformationValue), library(stargazer), library(VGAM), library(mlogit), library(ordinal), library(gdata), library(dfidx), library(stats), library(brant), library(readxl), library(stargazer), library(survival), library(ggfortify), library(survminer), library(tinytex).*
+
+```{r dependencies, message=FALSE, echo=FALSE}
+
+library(lubridate)
+library(anytime)
+library(dplyr)
+library(pwr)
+library(ggplot2) 
+library(readxl) 
+library(stargazer) 
+library(plm) 
+library(lmtest) 
+library(orcutt) 
+library(Hmisc) 
+library(AER) 
+library(aTSA) 
+library(sandwich) 
+library(clubSandwich) 
+library(car) 
+library(corrplot) 
+library(sjPlot) 
+library(gmodels) 
+library(lme4) 
+library(emmeans) 
+library(gmodels) 
+library(multcomp) 
+library(lmerTest) 
+library(readxl)
+library(epiDisplay)
+library(Epi)
+library(InformationValue)
+library(stargazer)
+library(VGAM)
+library(mlogit)
+library(ordinal)
+library(gdata)
+library(dfidx)
+library(stats)
+library(brant)
+library(readxl)
+library(stargazer)
+library(survival)
+library(ggfortify)
+library(survminer)
+library(tinytex)
+```
+
+
+Then we set the working directory (specific to your machine).
+
+```{r directory}
+setwd("C:/Users/Charlotte/Downloads")
+
+```
+
+Lastly, we need to load and factorise the data.
+
+```{r data}
+data = read.csv('records_filter.csv', sep= ',', header = TRUE)
+data$FormType = as.factor(data$FormType)
+data$Message = as.factor(data$Message)
+head(data)
+summary(data)
+
+
+plot(data$FormType, xlab='Formtype', ylab = 'Frequency')
+```
+
+```{r head_data, echo=FALSE}
+str(data)
+```
+
+
+# 2. Time
+
+## 2.1 Extracting Time
+
+As the time (StarTime, EndTime and FinalTime) is saved as a CHR type in the data (as seen above), we need to extract and convert it to a DateTime object to be able to calculate with it in R. We do this by using STRPTIME.
+
+```{r TimeEXT}
+StartTime = strptime(data$StartTime, "%H:%M:%S") 
+EndTime = strptime(data$Endtime, "%H:%M:%S")
+FinalTime = strptime(data$FinalTime, "%H:%M:%S")
+```
+We then calculate the differences.
+```{r CalcDIFF}
+TQDiff <- difftime(EndTime, StartTime, units='secs') #If seconds is desired, change units='secs'
+TRDiff <- difftime(FinalTime, EndTime, units='secs') #If seconds is desired, change units='secs'
+TTDiff <- difftime(FinalTime, StartTime, units='secs') #If seconds is desired, change units='secs'
+```
+
+We then append the dataframe with these differences and covert them to numeric values. This will help the analysis later on.
+```{r appendDF}
+data$TQDiff = as.numeric(TQDiff)
+data$TRDiff = as.numeric(TRDiff)
+data$TTDiff = as.numeric(TTDiff)
+
+head(data)
+```
+Below you can find some histograms of the time distribution. 
+
+```{r HistTime, echo=FALSE, out.width="100%"}
+par(mfrow= c(1,3))
+hist(data$TQDiff, col='steelblue', main='Not Normal', breaks = 80, xlab = "Questionnaire Time")
+hist(data$TRDiff, col='steelblue', main='Not Normal', breaks = 80, xlab = "Research Time")
+hist(data$TTDiff, col='steelblue', main='Not Normal', breaks = 80, xlab = "Total Time")
+```
+
+In order to perform analysis, we need to somewhat normalize the data. We do this by, first filtering out the extreme outliers by removing observations that took longer than the average+standard_deviation, and then doing a power transformation.
+
+```{r filtering1}
+#We need to filter out outliers
+data= filter(data, data$TQDiff < (mean(data$TQDiff) + 2*sd(data$TQDiff)))
+data= filter(data, data$TRDiff < (mean(data$TRDiff) + 2*sd(data$TRDiff)))
+data= filter(data, data$TTDiff < (mean(data$TTDiff) + 2*sd(data$TTDiff)))
+
+#In addition we perform a transformation on the data so it looks more normally distributed.
+data$TQDiff = log(data$TQDiff)
+data$TRDiff = log(data$TRDiff)
+data$TTDiff = log(data$TTDiff)
+```
+When we print out the histograms again, you can see the data looks more normal.
+
+```{r HistTime2, echo=FALSE, out.width="100%"}
+par(mfrow= c(1,3))
+hist(data$TQDiff, col='steelblue', main='Normal', breaks = length(data$TQDiff)+10, xlab = "Questionnaire Time")
+hist(data$TRDiff, col='steelblue', main='Normal', breaks = length(data$TRDiff)+10, xlab = "Research Time")
+hist(data$TTDiff, col='steelblue', main='Normal', breaks = length(data$TTDiff)+10, xlab = "Total Time")
+```
+
+```{r head_data2, echo=FALSE}
+str(data)
+```
+## 2.2 Analyzing Time
+
+We to perform analysis we need to check if the data is normally distributed. We do this with a Shapiro Wilk test. the H0 is that the data is normally distributed, thus a p < 0.05 will lead to the rejecting of the H0 and concluding that the data is **not** normally distributed. 
+
+```{r shapiroTest}
+#For the Questionnaire Time:
+shapiro.test(data$TQDiff)
+#For the Research Time:
+shapiro.test(data$TRDiff)
+#For the Total Time:
+shapiro.test(data$TTDiff)
+```
+
+We see from the Shapiro Test that the data is **not** normally distributed. This after all our efforts to make the data more normal is very disappointing. However, we will still continue with the ANOVA.
+
+```{r ANOVATime, echo=FALSE}
+print("Mean Questionnaire Time compared to all FormTypes")
+anovaT1 = aov(TQDiff ~ FormType, data = data) 
+summary(anovaT1)
+emmT1 = emmeans(anovaT1, ~FormType)
+pairs(emmT1, adjust = 'none')
+
+
+
+print("Mean Research Time compared to all FormTypes")
+anovaT2 = aov(TRDiff ~ FormType, data = data) 
+summary(anovaT2)
+print("Mean Total Time compared to all FormTypes")
+anovaT3 = aov(TTDiff ~ FormType, data = data) 
+summary(anovaT3)
+```
+We can conclude that the average/mean time to fill in the Questionnaire and the Total Time spent on the whole process are significant for the 3 levels of control.
+
+# 3. User Satisfaction
+# 3.1 Analysing the data
+
+```{r data2, echo= FALSE}
+#We need to load the data again as we don't want the time filter above to persist.
+data = read.csv('records_filter.csv', sep= ',', header = TRUE)
+data$FormType = as.factor(data$FormType)
+data$Message = as.factor(data$Message)
+```
+In order to see the size of the 3 control groups more clearly:
+```{r grouping}
+
+group1 = data[data$FormType == 1,]
+group2 = data[data$FormType == 2,]
+group3 = data[data$FormType == 3,]
+
+```{r groupprint, echo=FALSE}
+print(paste("group1:", nrow(group1)))
+#print(nrow(group1))
+print(paste("group2:", nrow(group2)))
+#print(nrow(group2))
+print(paste("group3:",nrow(group3)))
+#print(nrow(group3))
+```
+
+
+First, we need to check if our data is normally distributed or not. We do this again with a Shapiro-Wilk test.
+```{r shapiroTest2}
+#For the First Question (recommendation satisfaction):
+shapiro.test(data$V1)
+#For the Second Question (recommendation satisfaction):
+shapiro.test(data$V2)
+#For the Third Question (system usability satisfaction):
+shapiro.test(data$V3)
+```
+```{r normallity graphics2, echo=FALSE, out.width="100%"}
+par(mfrow=c(1,3))
+qqnorm(data$V1, main='Not Normal')
+qqline(data$V1)
+
+qqnorm(data$V2, main = 'Not Normal')
+qqline(data$V2)
+
+qqnorm(data$V3, main = 'Not Normal')
+qqline(data$V3)
+```
+
+As we can see from the shapiro test output as well as the graphics, the data is **not** normally distributed. Thus, we need to perfom **non-parametric** tests. 
+
+Next, we also need to check for homogeneity of the variances.
+```{r Homogeneity, echo=FALSE}
+res1 <- bartlett.test(V1 ~ FormType, data = data)
+res2 <- bartlett.test(V2 ~ FormType, data = data)
+res3 <- bartlett.test(V3 ~ FormType, data = data)
+res1
+res2
+res3
+```
+
+The data is indeed homoscedastic as the null hypothesis states that the variance is equal in all groups and we cannot reject the null. 
+
+### 3.1.1 Kruskal-Wallis Test
+
+Now we will perform the actual analysis. We assume that the samples were taken independently.
+
+```{r Kruskall}
+ 
+kruskal.test(V1~ FormType, data = data) 
+kruskal.test(V2 ~ FormType,data = data)
+kruskal.test(V3 ~ FormType,data = data)
+```
+
+There seems to be no significance. The satisfaction seems not to be related to the varying level of control represented by the FormType.
+
+### 3.1.2 Wilcoxon Test
+
+As the previous test yielded no significant results. We wanted to do another test. The Wilcoxin Test can also be used with **non-normally distrubuted** data. The other side of the coin is that the test can only compare two groups, as opposed to the Kruskal test that can compare multiple groups(3 FormTypes). So we will do a pairwise comparison of all groups of control in combination with each research question.
+
+```{r Wolcoxon}
+#compute Wilcoxin test (for non-parametrized data)
+wilcox.test(group1$V1, group2$V1, data = data, paired=F) 
+wilcox.test(group1$V1, group3$V1, data = data, paired=F) 
+wilcox.test(group2$V1, group3$V1, data = data, paired=F) 
+
+wilcox.test(group1$V2, group2$V2, data = data, paired=F) 
+wilcox.test(group1$V2, group3$V2, data = data, paired=F) 
+wilcox.test(group2$V2, group3$V2, data = data, paired=F) 
+
+wilcox.test(group1$V3, group2$V3, data = data, paired=F) 
+wilcox.test(group1$V3, group3$V3, data = data, paired=F) 
+wilcox.test(group2$V3, group3$V3, data = data, paired=F) 
+```
+
+The null hypothesis is that the median differences are equal to zero. 
