@@ -86,8 +86,3 @@ def addResearch(id, data, collection):
 
     return "succesfully exported research"
 
-def exitdb():
-    CONNECTION_STRING = "mongodb://root:6wTYD4gi78yIgTPx@ac-vhitqap-shard-00-00.rj2pktu.mongodb.net:27017,ac-vhitqap-shard-00-01.rj2pktu.mongodb.net:27017,ac-vhitqap-shard-00-02.rj2pktu.mongodb.net:27017/?ssl=true&replicaSet=atlas-14026p-shard-0&authSource=admin&retryWrites=true&w=majority"
-    client = MongoClient(CONNECTION_STRING)
-    client.close()
-
