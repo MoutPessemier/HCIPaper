@@ -6,11 +6,10 @@
 2. Once the repository has been cloned, jump to the backend folder: `cd backend/`.
 3. When in the backend folder, install all packages and dependencies using: `pip install...`.
 
-You can now start to develop from the backend branch 
+You can now start to develop from the backend branch
 
-### Spinning Up The Server
+### Spinning Up The Serve
 
-1. To run the backend server, make sure all dependencies are installed and all files are in the working directory. Additionally, make sure the data files (xlsx) are closed.
-2. run 'main.py' 
----
+To spin the server up locally, jump to `/app/` (`cd app/`) and run `python app.py`
 
+To spin up the server in a docker container, stay in the backend root folder and run `docker-compose up -d`
